@@ -25,185 +25,53 @@ from sionna.ofdm import KBestDetector, LinearDetector
 from sionna.mimo import StreamManagement
 
 
-# Load integrated scene
-scene = load_scene("Map/chalmers_map_v9.xml")
-
-
-
+# Load integrated scene from the xml file
+scene = load_scene("Map/V2_XML/chalmers_map_v2.xml")
 # Configure antenna array for all transmitters
-scene.tx_array = PlanarArray(num_rows=1,
-                             num_cols=1,
-                             vertical_spacing=0.5,
-                             horizontal_spacing=0.5,
-                             pattern="tr38901",
-                             polarization="V")
-
+scene.tx_array = PlanarArray(num_rows=4, num_cols=4, vertical_spacing=0.5,horizontal_spacing=0.5, pattern="tr38901",polarization="V")
 # Configure antenna array for all receivers
-scene.rx_array = PlanarArray(num_rows=1,
-                             num_cols=1,
-                             vertical_spacing=0.5,
-                             horizontal_spacing=0.5,
-                             pattern="dipole",
-                             polarization="cross")
-
+scene.rx_array = PlanarArray(num_rows=1, num_cols=1, vertical_spacing=0.5,horizontal_spacing=0.5, pattern="iso",polarization="V")
 # Create transmitter
 tx2 = Transmitter("tx2", [0.5, -343, 30], [0.0, 0.0, 0.0])   #Chalmers coordinates
 scene.add(tx2)
-
 tx3 = Transmitter("tx3", [65, -181.5, 35], [0.0, 0.0, 0.0])  #Chalmers coordinates
 scene.add(tx3)
-
 tx4 = Transmitter("tx4", [22, 182, 28], [0.0, 0.0, 0.0])  #Chalmers coordinates
 scene.add(tx4)
-
 tx5 = Transmitter("tx5", [-147, 327, 28], [0.0, 0.0, 0.0])  #Chalmers coordinates
 scene.add(tx5)
-
 tx6 = Transmitter("tx6", [-212, -33, 15], [0.0, 0.0, 0.0])  #Chalmers coordinates
 scene.add(tx6)
-
-
-# Create a receiver
-rx7 = Receiver("rx7", [-40, -428, 1.3], [0.0, 0.0, 0.0])  #Chalmers coordinates
-scene.add(rx7)
-
-rx8 = Receiver("rx8", [60, -294, 1.6], [0.0, 0.0, 0.0])  #Chalmers coordinates
-scene.add(rx8)
-
-scene.frequency = 2.14e9 # in Hz; implicitly updates RadioMaterials
-
-scene.synthetic_array = True # If set to False, ray tracing will be done per antenna element (slower for large arrays)
-
+# compute the coverage map which only depend upon the transmitter
 cm = scene.coverage_map(cm_cell_size=[1,1], num_samples=10e6, diffraction=True, scattering=True)
-paths = scene.compute_paths(max_depth=4)
 
-#Create new camera with different configuration
-
-camera = Camera("my_cam", position=[150, 61, 90], look_at=[19,3,1.5])
-scene.add(camera)
-scene.preview(paths=paths,coverage_map=cm)
-
-image = scene.render("preview", paths=paths, coverage_map=cm)
-
-print("Source coordinates: ", paths.sources.numpy())
-print("Transmitter coordinates: ", list(scene.transmitters.values())[0].position.numpy())
-
-# Show the coordinates of the endpoints of all rays.
-# These coincide with the location of the receivers.
-print("Target coordinates: ",paths.targets.numpy())
-print("Receiver coordinates: ",list(scene.receivers.values())[0].position.numpy())
-
-# Show the types of all paths:
-# 0 - LoS, 1 - Reflected, 2 - Diffracted, 3 - Scattered
-# Note that Diffraction and scattering are turned off by default.
-print("Path types: ", paths.types.numpy())
-
-# Let us inspect a specific path in detail
-path_idx = 1 # Try out other values in the range [0, 13]
-
-# For a detailed overview of the dimensions of all properties, have a look at the API documentation
-print(f"\n--- Detailed results for path {path_idx} ---")
-print(f"Channel coefficient: {paths.a[0,0,0,0,0,path_idx, 0].numpy()}")
-print(f"Propagation delay: {paths.tau[0,0,0,path_idx].numpy()*1e6:.5f} us")
-print(f"Zenith angle of departure: {paths.theta_t[0,0,0,path_idx]:.4f} rad")
-print(f"Azimuth angle of departure: {paths.phi_t[0,0,0,path_idx]:.4f} rad")
-print(f"Zenith angle of arrival: {paths.theta_r[0,0,0,path_idx]:.4f} rad")
-print(f"Azimuth angle of arrival: {paths.phi_r[0,0,0,path_idx]:.4f} rad")
+# initiate the path data dictionary
+path_data = {}
+CIR_data = {}
+# define a grid of positions for data collection
+ue_grid= []
+# Define the grid for the UE positions
+# TODO: Define the grid for the UE positions
+ue_positions = tf.squeeze(ue_grid)
+# Create batch_size receivers for the data generation
+for i in range(len(ue_positions)):
+    rx = Receiver(name=f"rx-{i}",
+                  position=ue_positions[i])
+    scene.add(rx)
+    # compute the path for that receiver
+    paths = scene.compute_paths(max_depth=4)
+    # convert the paths to dictionary for data storage
+    path_dict = paths.to_direct()
+    # append the path data to the position, which is the key of the dictionary
+    path_data[ue_positions[i]]=path_dict
+    # remove the rx from the scene
+    scene.remove(rx)
 
 """## From Paths to Channel Impulse Responses
-
 Once paths are computed, they can be transformed into channel impulse responses (CIRs).
 The class method [apply_doppler](https://nvlabs.github.io/sionna/api/rt.html#Paths.apply_doppler) can simulate time evolution of the CIR based on arbitrary velocity vectors of all transmitters and receivers for a desired sampling frequency and number of time steps.
 The class method [cir](https://nvlabs.github.io/sionna/api/rt.html#Paths.cir) generates the channel impulse responses which can be used by other components for link-level simulations in either time or frequency domains. The method also allows you to only consider certain types of paths, e.g., line-of-sight, reflections, etc.
 """
-
-# Default parameters in the PUSCHConfig
-subcarrier_spacing = 15e3
-fft_size = 48
-
-# Print shape of channel coefficients before the application of Doppler shifts
-# The last dimension corresponds to the number of time steps which defaults to one
-# as there is no mobility
-print("Shape of `a` before applying Doppler shifts: ", paths.a.shape)
-
-# Apply Doppler shifts
-paths.apply_doppler(sampling_frequency=subcarrier_spacing, # Set to 15e3 Hz
-                    num_time_steps=14, # Number of OFDM symbols
-                    tx_velocities=[3.,0,0], # We can set additional tx speeds
-                    rx_velocities=[0,7.,0]) # Or rx speeds
-
-print("Shape of `a` after applying Doppler shifts: ", paths.a.shape)
-
-a, tau = paths.cir()
-print("Shape of tau: ", tau.shape)
-
-"""Let us have a look at the channel impulse response for the 14 incoming paths from the simulation above."""
-
-t = tau[0,0,0,:]/1e-9 # Scale to ns
-a_abs = np.abs(a)[0,0,0,0,0,:,0]
-a_max = np.max(a_abs)
-# Add dummy entry at start/end for nicer figure
-t = np.concatenate([(0.,), t, (np.max(t)*1.1,)])
-a_abs = np.concatenate([(np.nan,), a_abs, (np.nan,)])
-
-# And plot the CIR
-plt.figure()
-plt.title("Channel impulse response realization")
-
-plt.stem(t, a_abs)
-plt.xlim([0, np.max(t)])
-plt.ylim([-2e-6, a_max*1.1])
-plt.xlabel(r"$\tau$ [ns]")
-plt.ylabel(r"$|a|$");
-
-"""Note that the delay of the first arriving path is normalized to zero. This behavior can be changed using the Paths' call property ``normalize_delays``. For link-level simulations, it is recommended to work with normalized delays, unless perfect synchronization is explicitly desired."""
-
-# Disable normalization of delays
-paths.normalize_delays = False
-
-# Get only the LoS path
-_, tau = paths.cir(los=True, reflection=False)
-print("Delay of first path without normalization: ", np.squeeze(tau))
-
-paths.normalize_delays = True
-_, tau = paths.cir(los=True, reflection=False)
-print("Delay of first path with normalization: ", np.squeeze(tau))
-
-"""The CIRs can now be loaded either in the time-domain or frequency-domain channel models, respectively.
-Please see [cir_to_ofdm_channel](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.cir_to_ofdm_channel) and [cir_to_time_channel](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.cir_to_time_channel) for further details.
-"""
-
-# Compute frequencies of subcarriers and center around carrier frequency
-frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
-
-# Compute the frequency response of the channel at frequencies.
-h_freq = cir_to_ofdm_channel(frequencies,
-                             a,
-                             tau,
-                             normalize=True) # Non-normalized includes path-loss
-
-# Verify that the channel power is normalized
-h_avg_power = tf.reduce_mean(tf.abs(h_freq)**2).numpy()
-
-print("Shape of h_freq: ", h_freq.shape)
-print("Average power h_freq: ", h_avg_power) # Channel is normalized
-
-"""The frequency responses `h_freq` are now ready to be processed by the [ApplyOFDMChannel](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.ApplyOFDMChannel) Layer."""
-
-# Placeholder for tx signal of shape
-# [batch size, num_tx, num_tx_ant, num_ofdm_symbols, fft_size]
-x = tf.zeros([h_freq.shape.as_list()[i] for i in [0,3,4,5,6]], tf.complex64)
-
-no = 0.1 # noise variance
-
-# Init channel layer
-channel = ApplyOFDMChannel(add_awgn=True)
-
-# Apply channel
-y = channel([x, h_freq, no])
-
-# [batch size, num_rx, num_rx_ant, num_ofdm_symbols, fft_size]
-print(y.shape)
 
 # data generation related code
 target_num_cirs = 50000 # Defines how many different CIRS are generated.
@@ -364,12 +232,3 @@ channel_model = CIRDataset(cir_generator,
                            num_tx_ant,
                            75,
                            num_time_steps)
-
-# Delete to free memory
-del a, tau
-
-# We need to enable sionna.config.xla_compat before we can use
-# tf.function with jit_compile=True.
-# See https://nvlabs.github.io/sionna/api/config.html#sionna.Config.xla_compat
-sionna.config.xla_compat=False # not supported in CIRDataset
-
