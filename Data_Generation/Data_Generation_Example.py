@@ -6,15 +6,6 @@ if os.getenv("CUDA_VISIBLE_DEVICES") is None:
     os.environ["CUDA_VISIBLE_DEVICES"] = f"{gpu_num}"
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-# Import Sionna
-try:
-    import sionna
-except ImportError as e:
-    # Install Sionna if package is not already installed
-    import os
-    os.system("pip install sionna")
-    import sionna
-
 # Configure the notebook to use only a single GPU and allocate only as much memory as needed
 # For more details, see https://www.tensorflow.org/guide/gpu
 import tensorflow as tf
@@ -25,32 +16,8 @@ if gpus:
     except RuntimeError as e:
         print(e)
 
-# Avoid warnings from TensorFlow
-tf.get_logger().setLevel('ERROR')
 
-# Colab does currently not support the latest version of ipython.
-# Thus, the preview does not work in Colab. However, whenever possible we
-# strongly recommend to use the scene preview mode.
-try: # detect if the notebook runs in Colab
-    import google.colab
-    no_preview = True # deactivate preview
-except:
-    if os.getenv("SIONNA_NO_PREVIEW"):
-        no_preview = True
-    else:
-        no_preview = False
-
-resolution = [480,320] # increase for higher quality of renderings
-
-# Define magic cell command to skip a cell if needed
-from IPython.core.magic import register_cell_magic
-from IPython import get_ipython
-
-@register_cell_magic
-def skip_if(line, cell):
-    if eval(line):
-        return
-    get_ipython().run_cell(cell)
+import sionna
 
 # Set random seed for reproducibility
 sionna.config.seed = 42
@@ -71,49 +38,10 @@ from sionna.utils import compute_ber, ebnodb2no, PlotBER
 from sionna.ofdm import KBestDetector, LinearDetector
 from sionna.mimo import StreamManagement
 
-"""## Loading Scenes
-
-The Sionna RT module can either load external scene files (in Mitsuba's XML file format) or it can load one of the [integrated scenes](https://nvlabs.github.io/sionna/api/rt.html#example-scenes).
-
-In this example, we load an example scene containing the area around the Frauenkirche in Munich, Germany.
-"""
 
 # Load integrated scene
 scene = load_scene(sionna.rt.scene.munich) # Try also sionna.rt.scene.etoile
 
-"""To visualize the scene, we can use the `preview` function which opens an interactive preview of the scene.
-This only works in Jupyter notebooks.
-
-You can use the following controls:
-
-- Mouse left: Rotate
-- Scroll wheel: Zoom
-- Mouse right: Move
-
-Please note that the preview does not work in Colab and is therefore deactivated when `colab_compat` is set to True.
-Further, only one preview instance can be open at the same time.
-"""
-
-# Render scene
-if no_preview:
-    scene.render(camera="scene-cam-0", num_samples=512);
-
-# Commented out IPython magic to ensure Python compatibility.
-# %%skip_if no_preview
-# # Open 3D preview (only works in Jupyter notebook)
-# scene.preview()
-
-"""It is often convenient to choose a viewpoint in the 3D preview prior to rendering it as a high-quality image.
-The next cell uses the "preview" camera which corresponds to the viewpoint of the current preview image.
-"""
-
-# The preview camera can be directly rendered as high-quality image
-if not no_preview:
-    scene.render(camera="preview", num_samples=512);
-else:
-    print("Function not available in Colab mode.")
-
-"""One can also render the image to a file as shown below:"""
 
 render_to_file = False # Set to True to render image to file
 
@@ -130,7 +58,7 @@ my_cam = Camera("my_cam", position=[-250,250,150], look_at=[-15,30,28])
 scene.add(my_cam)
 
 # Render scene with new camera*
-scene.render("my_cam", resolution=resolution, num_samples=512); # Increase num_samples to increase image quality
+scene.render("my_cam", num_samples=512); # Increase num_samples to increase image quality
 
 """Note that each [SceneObject](https://nvlabs.github.io/sionna/api/rt.html#scene-objects) (camera, transmitter,...) needs a unique name. Thus, running the cells above multiple times will lead to an error if the object name is not changed or the object is not removed from the scene.
 
@@ -209,26 +137,6 @@ paths = scene.compute_paths(max_depth=5,
                                               # by a Fibonacci sphere , too few rays can
                                               # lead to missing paths
 
-# Visualize paths in the scene
-if no_preview:
-    scene.render("my_cam", paths=paths, show_devices=True, show_paths=True, resolution=resolution);
-
-# Commented out IPython magic to ensure Python compatibility.
-# %%skip_if no_preview
-# scene.preview(paths, show_devices=True, show_paths=True) # Use the mouse to focus on the visualized paths
-
-"""*Remark*: only one preview instance can be opened at the same time. Please check the previous preview if no output appears.
-
-The [Paths](https://nvlabs.github.io/sionna/api/rt.html#paths) object contains all paths that have been found between transmitters and receivers.
-In principle, the existence of each path is determininistic for a given position and environment. Please note that due to the stochastic nature of the *shoot-and-bounce* algorithm, different runs of the `compute_paths` function can lead to different paths that are found. Most importantly, diffusely reflected or scattered paths are obtained through random sampling of directions after each interaction with a scene object. You can seet TensorFlow's random seed to a specific value before executing ``compute_paths`` to ensure reproducibility.
-
-The Paths object contains detailed information about every found path and allows us to generated channel impulse responses and apply Doppler shifts for the simulation of time evolution.
-
-Let us now inspect some of the available properties:
-"""
-
-# Show the coordinates of the starting points of all rays.
-# These coincide with the location of the transmitters.
 print("Source coordinates: ", paths.sources.numpy())
 print("Transmitter coordinates: ", list(scene.transmitters.values())[0].position.numpy())
 
