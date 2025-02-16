@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os # Configure which GPU
-if os.getenv("CUDA_VISIBLE_DEVICES") is None:
-    gpu_num = 0 # Use "" to use the CPU
-    os.environ["CUDA_VISIBLE_DEVICES"] = f"{gpu_num}"
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-# Configure the notebook to use only a single GPU and allocate only as much memory as needed
-# For more details, see https://www.tensorflow.org/guide/gpu
 import tensorflow as tf
 gpus = tf.config.list_physical_devices('GPU')
 if gpus:
@@ -15,7 +9,6 @@ if gpus:
         tf.config.experimental.set_memory_growth(gpus[0], True)
     except RuntimeError as e:
         print(e)
-
 
 import sionna
 
@@ -40,10 +33,9 @@ from sionna.mimo import StreamManagement
 
 
 # Load integrated scene
-scene = load_scene(sionna.rt.scene.munich) # Try also sionna.rt.scene.etoile
+scene = load_scene("Map/chalmers_map_v16_extra.xml")
 
-
-render_to_file = False # Set to True to render image to file
+render_to_file = True # Set to True to render image to file
 
 # Render scene to file from preview viewpoint
 if render_to_file:
@@ -51,21 +43,11 @@ if render_to_file:
                          filename="scene.png",
                          resolution=[650,500])
 
-"""Instead of the preview camera, one can also specify dedicated cameras with different positions and `look_at` directions."""
 
 # Create new camera with different configuration
 my_cam = Camera("my_cam", position=[-250,250,150], look_at=[-15,30,28])
 scene.add(my_cam)
 
-# Render scene with new camera*
-scene.render("my_cam", num_samples=512); # Increase num_samples to increase image quality
-
-"""Note that each [SceneObject](https://nvlabs.github.io/sionna/api/rt.html#scene-objects) (camera, transmitter,...) needs a unique name. Thus, running the cells above multiple times will lead to an error if the object name is not changed or the object is not removed from the scene.
-
-## Ray Tracing for Radio Propagation
-
-We need to configure transmitters and receivers prior to computing propagation paths between them. All transmitters and all receivers are equipped with the same antenna arrays which are defined by the `scene` properties `scene.tx_array` and `scene.rx_array`, respectively. Antenna arrays are composed of multiple identical antennas. Antennas can have custom or pre-defined patterns and are either single- or dual-polarized. One can add multiple transmitters and receivers to a scene which need to have unique names, a position, and orientation which is defined by yaw, pitch, and roll angles.
-"""
 
 # Configure antenna array for all transmitters
 scene.tx_array = PlanarArray(num_rows=1,
