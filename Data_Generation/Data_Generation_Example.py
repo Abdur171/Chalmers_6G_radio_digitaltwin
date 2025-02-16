@@ -33,10 +33,9 @@ from sionna.mimo import StreamManagement
 
 
 # Load integrated scene
-scene = load_scene("Map/chalmers_map_v16_extra.xml")
+scene = load_scene("Map/chalmers_map_v9.xml")
 
-render_to_file = True # Set to True to render image to file
-
+render_to_file = True # Set to True to render scene to file
 # Render scene to file from preview viewpoint
 if render_to_file:
     scene.render_to_file(camera="scene-cam-0", # Also try camera="preview"
@@ -66,36 +65,47 @@ scene.rx_array = PlanarArray(num_rows=1,
                              polarization="cross")
 
 # Create transmitter
-tx = Transmitter(name="tx",
-                 position=[8.5,21,27])
+tx2 = Transmitter("tx2", [0.5, -343, 30], [0.0, 0.0, 0.0])   #Chalmers coordinates
+scene.add(tx2)
 
-# Add transmitter instance to scene
-scene.add(tx)
+tx3 = Transmitter("tx3", [65, -181.5, 35], [0.0, 0.0, 0.0])  #Chalmers coordinates
+scene.add(tx3)
+
+tx4 = Transmitter("tx4", [22, 182, 28], [0.0, 0.0, 0.0])  #Chalmers coordinates
+scene.add(tx4)
+
+tx5 = Transmitter("tx5", [-147, 327, 28], [0.0, 0.0, 0.0])  #Chalmers coordinates
+scene.add(tx5)
+
+tx6 = Transmitter("tx6", [-212, -33, 15], [0.0, 0.0, 0.0])  #Chalmers coordinates
+scene.add(tx6)
+
 
 # Create a receiver
-rx = Receiver(name="rx",
-              position=[45,90,1.5],
-              orientation=[0,0,0])
+rx7 = Receiver("rx7", [-40, -428, 1.3], [0.0, 0.0, 0.0])  #Chalmers coordinates
+scene.add(rx7)
 
-# Add receiver instance to scene
-scene.add(rx)
-
-tx.look_at(rx) # Transmitter points towards receiver
-
-"""Each [SceneObject](https://nvlabs.github.io/sionna/api/rt.html#scene-objects) has an assigned [RadioMaterial](https://nvlabs.github.io/sionna/api/rt.html#radio-materials) that describes the electromagnetic properties of the object whenever it interacts with a ray.
-This behavior can be frequency-dependent and the ray tracing is done for a specific frequency.
-
-We now set the carrier frequency of the scene and implicitly update all RadioMaterials.
-"""
+rx8 = Receiver("rx8", [60, -294, 1.6], [0.0, 0.0, 0.0])  #Chalmers coordinates
+scene.add(rx8)
 
 scene.frequency = 2.14e9 # in Hz; implicitly updates RadioMaterials
 
 scene.synthetic_array = True # If set to False, ray tracing will be done per antenna element (slower for large arrays)
 
-"""The default scenes have RadioMaterials assigned to each scene object. However, the RadioMaterial of a specific object can be modified and customized by the user."""
+cm = scene.coverage_map(cm_cell_size=[1,1], num_samples=10e6, diffraction=True, scattering=True)
+paths = scene.compute_paths(max_depth=10)
 
-# Select an example object from the scene
-so = scene.get("Altes_Rathaus-itu_marble")
+#Create new camera with different configuration
+
+camera = scene.get("my_cam")
+if camera is not None:
+    scene.remove("my_cam")
+
+camera = Camera("my_cam", position=[150, 61, 90], look_at=[19,3,1.5])
+scene.add(camera)
+scene.preview(paths=paths, coverage_map=cm)
+
+image = scene.render("preview", paths=paths, coverage_map=cm)
 
 # Print name of assigned radio material for different frequenies
 for f in [3.5e9, 2.14e9]: # Print for differrent frequencies
