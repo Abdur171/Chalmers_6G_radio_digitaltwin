@@ -13,6 +13,7 @@ sionna.config.seed = 42
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+import json
 
 # Import Sionna RT components
 from sionna.rt import load_scene, Transmitter, Receiver, PlanarArray, Camera
@@ -47,6 +48,8 @@ cm = scene.coverage_map(cm_cell_size=[1,1], num_samples=10e6, diffraction=True, 
 
 # initiate the path data dictionary
 path_data = {}
+# initiate the CIR data dictionary
+# notice that they are separated because they are going to be used by different people
 CIR_data = {}
 # define a grid of positions for data collection
 ue_grid= []
@@ -64,49 +67,48 @@ for i in range(len(ue_positions)):
     path_dict = paths.to_direct()
     # append the path data to the position, which is the key of the dictionary
     path_data[ue_positions[i]]=path_dict
-    # remove the rx from the scene
-    scene.remove(rx)
 
-"""## From Paths to Channel Impulse Responses
-Once paths are computed, they can be transformed into channel impulse responses (CIRs).
-The class method [apply_doppler](https://nvlabs.github.io/sionna/api/rt.html#Paths.apply_doppler) can simulate time evolution of the CIR based on arbitrary velocity vectors of all transmitters and receivers for a desired sampling frequency and number of time steps.
-The class method [cir](https://nvlabs.github.io/sionna/api/rt.html#Paths.cir) generates the channel impulse responses which can be used by other components for link-level simulations in either time or frequency domains. The method also allows you to only consider certain types of paths, e.g., line-of-sight, reflections, etc.
-"""
 
-# data generation related code
-target_num_cirs = 50000 # Defines how many different CIRS are generated.
-# Remark: some path are removed if no path was found for this position
+    """## From Paths to Channel Impulse Responses
+    Once paths are computed, they can be transformed into channel impulse responses (CIRs).
+    The class method [apply_doppler](https://nvlabs.github.io/sionna/api/rt.html#Paths.apply_doppler) can simulate time evolution of the CIR based on arbitrary velocity vectors of all transmitters and receivers for a desired sampling frequency and number of time steps.
+    The class method [cir](https://nvlabs.github.io/sionna/api/rt.html#Paths.cir) generates the channel impulse responses which can be used by other components for link-level simulations in either time or frequency domains. The method also allows you to only consider certain types of paths, e.g., line-of-sight, reflections, etc.
+    """
 
-max_depth = 5
-min_gain_db = -130 # in dB / ignore any position with less than -130 dB path gain
-max_gain_db = 0 # in dB / ignore any position with more than 0 dB path gain
+    # data generation related code
+    target_num_cirs = 50000 # Defines how many different CIRS are generated.
+    # Remark: some path are removed if no path was found for this position
 
-# Sample points within a 10-400m radius around the transmitter
-min_dist = 10 # in m
-max_dist = 400 # in m
+    max_depth = 5
+    min_gain_db = -130 # in dB / ignore any position with less than -130 dB path gain
+    max_gain_db = 0 # in dB / ignore any position with more than 0 dB path gain
 
-# Placeholder to gather channel impulse reponses
-a = None
-tau = None
+    # Sample points within a 10-400m radius around the transmitter
+    min_dist = 10 # in m
+    max_dist = 400 # in m
 
-# Each simulation returns batch_size_cir results
-num_runs = int(np.ceil(target_num_cirs/batch_size_cir))
-for idx in range(num_runs):
-    print(f"Progress: {idx+1}/{num_runs}", end="\r")
+    # Placeholder to gather channel impulse reponses
+    a = None
+    tau = None
 
-    # Sample random user positions
-    ue_pos, _ = cm.sample_positions(
+    # Each simulation returns batch_size_cir results
+    num_runs = int(np.ceil(target_num_cirs/batch_size_cir))
+    for idx in range(num_runs):
+        print(f"Progress: {idx+1}/{num_runs}", end="\r")
+
+        # Sample random user positions
+        ue_pos, _ = cm.sample_positions(
                         num_pos=batch_size_cir,
                         metric="path_gain",
                         min_val_db=min_gain_db,
                         max_val_db=max_gain_db,
                         min_dist=min_dist,
                         max_dist=max_dist)
-    ue_pos = tf.squeeze(ue_pos)
+        ue_pos = tf.squeeze(ue_pos)
 
-    # Update all receiver positions
-    for idx in range(batch_size_cir):
-        scene.receivers[f"rx-{idx}"].position = ue_pos[idx]
+        # Update all receiver positions
+        for idx in range(batch_size_cir):
+            scene.receivers[f"rx-{idx}"].position = ue_pos[idx]
 
     # Simulate CIR
     paths = scene.compute_paths(
@@ -134,88 +136,16 @@ for idx in range(num_runs):
         a = np.concatenate([a, a_], axis=3)
         tau = np.concatenate([tau, tau_], axis=2)
 
+    # Store the CIR data
+    path_data[ue_positions[i]]=(a,tau)
 
+    # remove the rx from the scene
+    scene.remove(rx)
 
-class CIRGenerator:
-    """Creates a generator from a given dataset of channel impulse responses.
+# Save the path data
+with open("path_data.json", "w") as f:
+    json.dump(path_data, f)
+# Save the CIR data
+with open("CIR_data.json", "w") as f:
+    json.dump(CIR_data, f)
 
-    The generator samples ``num_tx`` different transmitters from the given path
-    coefficients `a` and path delays `tau` and stacks the CIRs into a single tensor.
-
-    Note that the generator internally samples ``num_tx`` random transmitters
-    from the dataset. For this, the inputs ``a`` and ``tau`` must be given for
-    a single transmitter (i.e., ``num_tx`` =1) which will then be stacked
-    internally.
-
-    Parameters
-    ----------
-    a : [batch size, num_rx, num_rx_ant, 1, num_tx_ant, num_paths, num_time_steps], complex
-        Path coefficients per transmitter.
-
-    tau : [batch size, num_rx, 1, num_paths], float
-        Path delays [s] per transmitter.
-
-    num_tx : int
-        Number of transmitters
-
-    Output
-    -------
-    a : [batch size, num_rx, num_rx_ant, num_tx, num_tx_ant, num_paths, num_time_steps], tf.complex
-        Path coefficients
-
-    tau : [batch size, num_rx, num_tx, num_paths], tf.float
-        Path delays [s]
-    """
-
-    def __init__(self,
-                 a,
-                 tau,
-                 num_tx):
-
-        # Copy to tensorflow
-        self._a = tf.constant(a, tf.complex64)
-        self._tau = tf.constant(tau, tf.float32)
-        self._dataset_size = self._a.shape[0]
-
-        self._num_tx = num_tx
-
-    def __call__(self):
-
-        # Generator implements an infinite loop that yields new random samples
-        while True:
-            # Sample 4 random users and stack them together
-            idx,_,_ = tf.random.uniform_candidate_sampler(
-                            tf.expand_dims(tf.range(self._dataset_size, dtype=tf.int64), axis=0),
-                            num_true=self._dataset_size,
-                            num_sampled=self._num_tx,
-                            unique=True,
-                            range_max=self._dataset_size)
-
-            a = tf.gather(self._a, idx)
-            tau = tf.gather(self._tau, idx)
-
-            # Transpose to remove batch dimension
-            a = tf.transpose(a, (3,1,2,0,4,5,6))
-            tau = tf.transpose(tau, (2,1,0,3))
-
-            # And remove batch-dimension
-            a = tf.squeeze(a, axis=0)
-            tau = tf.squeeze(tau, axis=0)
-
-            yield a, tau
-
-"""We use Sionna's built-in [CIRDataset](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.CIRDataset) to initialize a channel model that can be directly used in Sionna's [OFDMChannel](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.OFDMChannel) layer."""
-
-batch_size = 20
-
-# Init CIR generator
-cir_generator = CIRGenerator(a,tau,num_tx)
-# Initialises a channel model that can be directly used by OFDMChannel layer
-channel_model = CIRDataset(cir_generator,
-                           batch_size,
-                           num_rx,
-                           num_rx_ant,
-                           num_tx,
-                           num_tx_ant,
-                           75,
-                           num_time_steps)
