@@ -35,13 +35,6 @@ from sionna.mimo import StreamManagement
 # Load integrated scene
 scene = load_scene("Map/chalmers_map_v9.xml")
 
-render_to_file = True # Set to True to render scene to file
-# Render scene to file from preview viewpoint
-if render_to_file:
-    scene.render_to_file(camera="scene-cam-0", # Also try camera="preview"
-                         filename="scene.png",
-                         resolution=[650,500])
-
 
 # Create new camera with different configuration
 my_cam = Camera("my_cam", position=[-250,250,150], look_at=[-15,30,28])
@@ -92,7 +85,7 @@ scene.frequency = 2.14e9 # in Hz; implicitly updates RadioMaterials
 
 scene.synthetic_array = True # If set to False, ray tracing will be done per antenna element (slower for large arrays)
 
-cm = scene.coverage_map(cm_cell_size=[1,1], num_samples=10e6, diffraction=True, scattering=True)
+# cm = scene.coverage_map(cm_cell_size=[1,1], num_samples=10e6, diffraction=True, scattering=True)
 paths = scene.compute_paths(max_depth=10)
 
 #Create new camera with different configuration
