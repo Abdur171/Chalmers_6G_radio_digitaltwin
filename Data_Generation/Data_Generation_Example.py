@@ -68,7 +68,6 @@ for i in range(len(ue_positions)):
     # append the path data to the position, which is the key of the dictionary
     path_data[ue_positions[i]]=path_dict
 
-
     """## From Paths to Channel Impulse Responses
     Once paths are computed, they can be transformed into channel impulse responses (CIRs).
     The class method [apply_doppler](https://nvlabs.github.io/sionna/api/rt.html#Paths.apply_doppler) can simulate time evolution of the CIR based on arbitrary velocity vectors of all transmitters and receivers for a desired sampling frequency and number of time steps.
