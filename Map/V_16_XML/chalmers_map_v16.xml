@@ -20,6 +20,36 @@
 	<bsdf type="diffuse" id="mat-itu_glass" name="mat-itu_glass">
 		<rgb value="1.000000 0.000000 0.300000" name="reflectance"/>
 	</bsdf>
+	<bsdf type="twosided" id="mat-itu_concrete" name="mat-itu_concrete">
+		<bsdf type="principled" name="bsdf">
+			<rgb value="0.410921 0.375613 0.307622" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.250000"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.000900"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-itu_marble" name="mat-itu_marble">
+		<bsdf type="principled" name="bsdf">
+			<rgb value="0.014666 0.014666 0.014666" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.250000"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.000900"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
 	<bsdf type="diffuse" id="mat-itu_wet_ground" name="mat-itu_wet_ground">
 		<rgb value="0.009000 0.002000 0.800000" name="reflectance"/>
 	</bsdf>
@@ -46,29 +76,11 @@
 			<float name="specular" value="0.020000"/>
 		</bsdf>
 	</bsdf>
-	<bsdf type="twosided" id="mat-itu_concrete" name="mat-itu_concrete">
-		<bsdf type="principled" name="bsdf">
-			<rgb value="0.035213 0.035213 0.035213" name="base_color"/>
-			<float name="spec_tint" value="0.000000"/>
-			<float name="spec_trans" value="0.000000"/>
-			<float name="metallic" value="0.000000"/>
-			<float name="anisotropic" value="0.000000"/>
-			<float name="roughness" value="0.250000"/>
-			<float name="sheen" value="0.000000"/>
-			<float name="sheen_tint" value="0.500000"/>
-			<float name="clearcoat" value="0.000000"/>
-			<float name="clearcoat_gloss" value="0.000900"/>
-			<float name="specular" value="0.500000"/>
-		</bsdf>
-	</bsdf>
-	<bsdf type="twosided" id="default-bsdf" name="default-bsdf">
-		<bsdf type="diffuse" name="bsdf"/>
-	</bsdf>
 
 <!-- Emitters -->
 
 	<emitter type="constant" id="elm__1" name="elm__1">
-		<rgb value="0.710565 0.710565 0.710565" name="radiance"/>
+		<rgb value="0.814049 0.814049 0.814049" name="radiance"/>
 	</emitter>
 
 <!-- Shapes -->
@@ -563,203 +575,198 @@
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__102" name="elm__102">
+	<shape type="ply" id="elm__103" name="elm__103">
 		<string name="filename" value="meshes/element_183-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__103" name="elm__103">
+	<shape type="ply" id="elm__104" name="elm__104">
 		<string name="filename" value="meshes/element_183-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__104" name="elm__104">
+	<shape type="ply" id="elm__105" name="elm__105">
+		<string name="filename" value="meshes/element_183-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__106" name="elm__106">
 		<string name="filename" value="meshes/element_184-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__105" name="elm__105">
+	<shape type="ply" id="elm__107" name="elm__107">
 		<string name="filename" value="meshes/element_184-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__106" name="elm__106">
+	<shape type="ply" id="elm__108" name="elm__108">
 		<string name="filename" value="meshes/element_185-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__107" name="elm__107">
+	<shape type="ply" id="elm__109" name="elm__109">
 		<string name="filename" value="meshes/element_185-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__108" name="elm__108">
+	<shape type="ply" id="elm__110" name="elm__110">
 		<string name="filename" value="meshes/element_186-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__109" name="elm__109">
+	<shape type="ply" id="elm__111" name="elm__111">
 		<string name="filename" value="meshes/element_186-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__110" name="elm__110">
+	<shape type="ply" id="elm__112" name="elm__112">
 		<string name="filename" value="meshes/element_187-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__111" name="elm__111">
+	<shape type="ply" id="elm__113" name="elm__113">
 		<string name="filename" value="meshes/element_187-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__112" name="elm__112">
+	<shape type="ply" id="elm__114" name="elm__114">
 		<string name="filename" value="meshes/element_188-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__113" name="elm__113">
+	<shape type="ply" id="elm__115" name="elm__115">
 		<string name="filename" value="meshes/element_188-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__114" name="elm__114">
+	<shape type="ply" id="elm__116" name="elm__116">
 		<string name="filename" value="meshes/element_189-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__115" name="elm__115">
+	<shape type="ply" id="elm__117" name="elm__117">
 		<string name="filename" value="meshes/element_189-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__116" name="elm__116">
+	<shape type="ply" id="elm__118" name="elm__118">
 		<string name="filename" value="meshes/element_190-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__117" name="elm__117">
+	<shape type="ply" id="elm__119" name="elm__119">
 		<string name="filename" value="meshes/element_190-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__118" name="elm__118">
+	<shape type="ply" id="elm__120" name="elm__120">
 		<string name="filename" value="meshes/element_191-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__119" name="elm__119">
+	<shape type="ply" id="elm__121" name="elm__121">
 		<string name="filename" value="meshes/element_191-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__120" name="elm__120">
+	<shape type="ply" id="elm__122" name="elm__122">
 		<string name="filename" value="meshes/Gustaf_Dal_nsalen-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__121" name="elm__121">
+	<shape type="ply" id="elm__123" name="elm__123">
 		<string name="filename" value="meshes/Gustaf_Dal_nsalen-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__122" name="elm__122">
+	<shape type="ply" id="elm__124" name="elm__124">
 		<string name="filename" value="meshes/Kalle_Glader-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__123" name="elm__123">
+	<shape type="ply" id="elm__125" name="elm__125">
 		<string name="filename" value="meshes/Kalle_Glader-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__124" name="elm__124">
+	<shape type="ply" id="elm__126" name="elm__126">
 		<string name="filename" value="meshes/element_217-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__125" name="elm__125">
+	<shape type="ply" id="elm__127" name="elm__127">
 		<string name="filename" value="meshes/element_217-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__126" name="elm__126">
+	<shape type="ply" id="elm__128" name="elm__128">
 		<string name="filename" value="meshes/element_218-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__127" name="elm__127">
+	<shape type="ply" id="elm__129" name="elm__129">
 		<string name="filename" value="meshes/element_218-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__128" name="elm__128">
+	<shape type="ply" id="elm__130" name="elm__130">
 		<string name="filename" value="meshes/Gr_na_mossen-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__129" name="elm__129">
+	<shape type="ply" id="elm__131" name="elm__131">
 		<string name="filename" value="meshes/Gr_na_mossen-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__130" name="elm__130">
+	<shape type="ply" id="elm__132" name="elm__132">
 		<string name="filename" value="meshes/Chabo-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__131" name="elm__131">
+	<shape type="ply" id="elm__133" name="elm__133">
 		<string name="filename" value="meshes/Chabo-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__132" name="elm__132">
+	<shape type="ply" id="elm__134" name="elm__134">
 		<string name="filename" value="meshes/Chalmers_Bibliotek_Huvudbibliotek-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__133" name="elm__133">
+	<shape type="ply" id="elm__135" name="elm__135">
 		<string name="filename" value="meshes/Chalmers_Bibliotek_Huvudbibliotek-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__134" name="elm__134">
+	<shape type="ply" id="elm__136" name="elm__136">
 		<string name="filename" value="meshes/Kemi_och_Bioteknik-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__135" name="elm__135">
+	<shape type="ply" id="elm__137" name="elm__137">
 		<string name="filename" value="meshes/Kemi_och_Bioteknik-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__136" name="elm__136">
+	<shape type="ply" id="elm__138" name="elm__138">
 		<string name="filename" value="meshes/Maskinteknik_002-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__137" name="elm__137">
+	<shape type="ply" id="elm__139" name="elm__139">
 		<string name="filename" value="meshes/Maskinteknik_002-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__138" name="elm__138">
+	<shape type="ply" id="elm__140" name="elm__140">
 		<string name="filename" value="meshes/Matematiska_vetenskaper-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__139" name="elm__139">
-		<string name="filename" value="meshes/Matematiska_vetenskaper-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__140" name="elm__140">
-		<string name="filename" value="meshes/SSPA-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
 	<shape type="ply" id="elm__141" name="elm__141">
-		<string name="filename" value="meshes/SSPA-itu_metal.ply"/>
+		<string name="filename" value="meshes/Matematiska_vetenskaper-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
@@ -794,433 +801,499 @@
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
 	<shape type="ply" id="elm__148" name="elm__148">
-		<string name="filename" value="meshes/element_222-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__149" name="elm__149">
-		<string name="filename" value="meshes/element_222-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__150" name="elm__150">
 		<string name="filename" value="meshes/element_225-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__151" name="elm__151">
+	<shape type="ply" id="elm__149" name="elm__149">
 		<string name="filename" value="meshes/element_225-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__152" name="elm__152">
+	<shape type="ply" id="elm__150" name="elm__150">
 		<string name="filename" value="meshes/element_230-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__153" name="elm__153">
+	<shape type="ply" id="elm__151" name="elm__151">
 		<string name="filename" value="meshes/element_230-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__154" name="elm__154">
+	<shape type="ply" id="elm__152" name="elm__152">
 		<string name="filename" value="meshes/element_232-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__155" name="elm__155">
+	<shape type="ply" id="elm__153" name="elm__153">
 		<string name="filename" value="meshes/element_232-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__156" name="elm__156">
+	<shape type="ply" id="elm__154" name="elm__154">
 		<string name="filename" value="meshes/element_256-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__157" name="elm__157">
+	<shape type="ply" id="elm__155" name="elm__155">
 		<string name="filename" value="meshes/element_256-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__158" name="elm__158">
+	<shape type="ply" id="elm__156" name="elm__156">
 		<string name="filename" value="meshes/element_260-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__159" name="elm__159">
+	<shape type="ply" id="elm__157" name="elm__157">
 		<string name="filename" value="meshes/element_260-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__160" name="elm__160">
+	<shape type="ply" id="elm__158" name="elm__158">
 		<string name="filename" value="meshes/element_262-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__161" name="elm__161">
+	<shape type="ply" id="elm__159" name="elm__159">
 		<string name="filename" value="meshes/element_262-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__162" name="elm__162">
+	<shape type="ply" id="elm__160" name="elm__160">
 		<string name="filename" value="meshes/element_265-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__163" name="elm__163">
+	<shape type="ply" id="elm__161" name="elm__161">
 		<string name="filename" value="meshes/element_265-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__164" name="elm__164">
+	<shape type="ply" id="elm__162" name="elm__162">
 		<string name="filename" value="meshes/Elektro-__Data-_och_IT-teknik_001-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__165" name="elm__165">
+	<shape type="ply" id="elm__163" name="elm__163">
 		<string name="filename" value="meshes/Elektro-__Data-_och_IT-teknik_001-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__166" name="elm__166">
+	<shape type="ply" id="elm__164" name="elm__164">
 		<string name="filename" value="meshes/Chalmers_K_rhus-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__167" name="elm__167">
+	<shape type="ply" id="elm__165" name="elm__165">
 		<string name="filename" value="meshes/Chalmers_K_rhus-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__168" name="elm__168">
+	<shape type="ply" id="elm__166" name="elm__166">
 		<string name="filename" value="meshes/Arkitektur-__Bygg-_och_Milj_teknik-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__169" name="elm__169">
+	<shape type="ply" id="elm__167" name="elm__167">
 		<string name="filename" value="meshes/Arkitektur-__Bygg-_och_Milj_teknik-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__170" name="elm__170">
+	<shape type="ply" id="elm__168" name="elm__168">
 		<string name="filename" value="meshes/element_272-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__171" name="elm__171">
+	<shape type="ply" id="elm__169" name="elm__169">
 		<string name="filename" value="meshes/element_272-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__172" name="elm__172">
+	<shape type="ply" id="elm__170" name="elm__170">
 		<string name="filename" value="meshes/element_273-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__173" name="elm__173">
+	<shape type="ply" id="elm__171" name="elm__171">
 		<string name="filename" value="meshes/element_273-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__174" name="elm__174">
+	<shape type="ply" id="elm__172" name="elm__172">
 		<string name="filename" value="meshes/element_274-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__175" name="elm__175">
+	<shape type="ply" id="elm__173" name="elm__173">
 		<string name="filename" value="meshes/element_274-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__176" name="elm__176">
+	<shape type="ply" id="elm__174" name="elm__174">
 		<string name="filename" value="meshes/element_274-itu_brick-001.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__177" name="elm__177">
-		<string name="filename" value="meshes/CA-Huset-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__178" name="elm__178">
-		<string name="filename" value="meshes/CA-Huset-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__180" name="elm__180">
-		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__181" name="elm__181">
-		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__182" name="elm__182">
-		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_glass.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_glass" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__183" name="elm__183">
+	<shape type="ply" id="elm__175" name="elm__175">
 		<string name="filename" value="meshes/Chalmers_K_rhus_002-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__184" name="elm__184">
+	<shape type="ply" id="elm__176" name="elm__176">
 		<string name="filename" value="meshes/Chalmers_K_rhus_002-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__185" name="elm__185">
+	<shape type="ply" id="elm__177" name="elm__177">
 		<string name="filename" value="meshes/Chalmers_K_rhus_002-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__186" name="elm__186">
+	<shape type="ply" id="elm__178" name="elm__178">
 		<string name="filename" value="meshes/Chalmers_K_rhus_004-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__187" name="elm__187">
+	<shape type="ply" id="elm__179" name="elm__179">
 		<string name="filename" value="meshes/Chalmers_K_rhus_004-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__188" name="elm__188">
+	<shape type="ply" id="elm__180" name="elm__180">
 		<string name="filename" value="meshes/Chalmers_K_rhus_004-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__189" name="elm__189">
+	<shape type="ply" id="elm__181" name="elm__181">
 		<string name="filename" value="meshes/Chalmers_K_rhus_005-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__190" name="elm__190">
+	<shape type="ply" id="elm__182" name="elm__182">
 		<string name="filename" value="meshes/Chalmers_K_rhus_005-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__191" name="elm__191">
-		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__192" name="elm__192">
-		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__193" name="elm__193">
-		<string name="filename" value="meshes/Chalmers_K_rhus_007-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__194" name="elm__194">
-		<string name="filename" value="meshes/Chalmers_K_rhus_007-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__195" name="elm__195">
+	<shape type="ply" id="elm__183" name="elm__183">
 		<string name="filename" value="meshes/Chalmers_K_rhus_008-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__196" name="elm__196">
+	<shape type="ply" id="elm__184" name="elm__184">
 		<string name="filename" value="meshes/Chalmers_K_rhus_008-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__197" name="elm__197">
+	<shape type="ply" id="elm__185" name="elm__185">
 		<string name="filename" value="meshes/Chalmers_K_rhus_009-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__198" name="elm__198">
+	<shape type="ply" id="elm__186" name="elm__186">
 		<string name="filename" value="meshes/Chalmers_K_rhus_009-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__199" name="elm__199">
+	<shape type="ply" id="elm__187" name="elm__187">
 		<string name="filename" value="meshes/Chalmers_K_rhus_010-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__200" name="elm__200">
+	<shape type="ply" id="elm__188" name="elm__188">
 		<string name="filename" value="meshes/Chalmers_K_rhus_010-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__201" name="elm__201">
-		<string name="filename" value="meshes/Chalmers_K_rhus_011-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__202" name="elm__202">
-		<string name="filename" value="meshes/Chalmers_K_rhus_011-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__203" name="elm__203">
-		<string name="filename" value="meshes/Chalmers_K_rhus_012-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__204" name="elm__204">
-		<string name="filename" value="meshes/Chalmers_K_rhus_012-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__205" name="elm__205">
-		<string name="filename" value="meshes/CA-Huset_001-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__206" name="elm__206">
-		<string name="filename" value="meshes/CA-Huset_001-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__207" name="elm__207">
-		<string name="filename" value="meshes/CA-Huset_003-itu_brick.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_brick" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__208" name="elm__208">
-		<string name="filename" value="meshes/CA-Huset_003-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__209" name="elm__209">
+	<shape type="ply" id="elm__189" name="elm__189">
 		<string name="filename" value="meshes/CA-Huset_004-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__210" name="elm__210">
+	<shape type="ply" id="elm__190" name="elm__190">
 		<string name="filename" value="meshes/CA-Huset_004-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__211" name="elm__211">
-		<string name="filename" value="meshes/Chalmers_K_rhus_016-itu_brick.ply"/>
+	<shape type="ply" id="elm__191" name="elm__191">
+		<string name="filename" value="meshes/Chalmers_K_rhus_012-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__212" name="elm__212">
-		<string name="filename" value="meshes/Chalmers_K_rhus_016-itu_metal.ply"/>
+	<shape type="ply" id="elm__192" name="elm__192">
+		<string name="filename" value="meshes/Chalmers_K_rhus_012-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
+	<shape type="ply" id="elm__193" name="elm__193">
+		<string name="filename" value="meshes/CA-Huset_005-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__194" name="elm__194">
+		<string name="filename" value="meshes/CA-Huset_005-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__196" name="elm__196">
+		<string name="filename" value="meshes/Chalmers_K_rhus_013-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__197" name="elm__197">
+		<string name="filename" value="meshes/Chalmers_K_rhus_013-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__198" name="elm__198">
+		<string name="filename" value="meshes/Chalmers_K_rhus_013-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__199" name="elm__199">
+		<string name="filename" value="meshes/Chalmers_K_rhus_013-itu_concrete.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_concrete" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__201" name="elm__201">
+		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__202" name="elm__202">
+		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__203" name="elm__203">
+		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__204" name="elm__204">
+		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_concrete.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_concrete" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__205" name="elm__205">
+		<string name="filename" value="meshes/Chalmers_K_rhus_006-itu_marble.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_marble" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__206" name="elm__206">
+		<string name="filename" value="meshes/Chalmers_K_rhus_015-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__207" name="elm__207">
+		<string name="filename" value="meshes/Chalmers_K_rhus_015-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__208" name="elm__208">
+		<string name="filename" value="meshes/Chalmers_K_rhus_015-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__209" name="elm__209">
+		<string name="filename" value="meshes/Chalmers_K_rhus_015-itu_concrete.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_concrete" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__210" name="elm__210">
+		<string name="filename" value="meshes/CA-Huset_001-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__211" name="elm__211">
+		<string name="filename" value="meshes/CA-Huset_001-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__212" name="elm__212">
+		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
 	<shape type="ply" id="elm__213" name="elm__213">
-		<string name="filename" value="meshes/Chalmers_K_rhus_016-itu_glass.ply"/>
+		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__214" name="elm__214">
+		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
 	<shape type="ply" id="elm__215" name="elm__215">
-		<string name="filename" value="meshes/A-dammen.ply"/>
+		<string name="filename" value="meshes/Chalmers_K_rhus_001-itu_concrete.ply"/>
 		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_wet_ground" name="bsdf"/>
+		<ref id="mat-itu_concrete" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__216" name="elm__216">
+		<string name="filename" value="meshes/Chalmers_K_rhus_003-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
 	<shape type="ply" id="elm__217" name="elm__217">
-		<string name="filename" value="meshes/Plane.ply"/>
-		<ref id="mat-itu_very_dry_ground" name="bsdf"/>
+		<string name="filename" value="meshes/Chalmers_K_rhus_003-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
 	<shape type="ply" id="elm__218" name="elm__218">
-		<string name="filename" value="meshes/Cube_013.ply"/>
+		<string name="filename" value="meshes/Chalmers_K_rhus_003-itu_concrete.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_concrete" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__219" name="elm__219">
+		<string name="filename" value="meshes/SSPA_002-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
 	<shape type="ply" id="elm__220" name="elm__220">
+		<string name="filename" value="meshes/SSPA_002-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__221" name="elm__221">
+		<string name="filename" value="meshes/SSPA_003-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__222" name="elm__222">
+		<string name="filename" value="meshes/SSPA_003-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__223" name="elm__223">
+		<string name="filename" value="meshes/Arkitektur-__Bygg-_och_Milj_teknik_001-itu_brick.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__224" name="elm__224">
+		<string name="filename" value="meshes/Arkitektur-__Bygg-_och_Milj_teknik_001-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__226" name="elm__226">
+		<string name="filename" value="meshes/A-dammen.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_wet_ground" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__228" name="elm__228">
+		<string name="filename" value="meshes/Plane.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_very_dry_ground" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__229" name="elm__229">
+		<string name="filename" value="meshes/Cube_013.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_brick" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__230" name="elm__230">
 		<string name="filename" value="meshes/Cube-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__221" name="elm__221">
+	<shape type="ply" id="elm__231" name="elm__231">
 		<string name="filename" value="meshes/Cube-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__222" name="elm__222">
+	<shape type="ply" id="elm__232" name="elm__232">
 		<string name="filename" value="meshes/Cube-itu_concrete.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_concrete" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__223" name="elm__223">
-		<string name="filename" value="meshes/window_enkel_002-itu_glass.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_glass" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__224" name="elm__224">
-		<string name="filename" value="meshes/window_enkel_002-itu_metal.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__225" name="elm__225">
-		<string name="filename" value="meshes/window_enkel_002-itu_glass-001.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_glass" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__226" name="elm__226">
-		<string name="filename" value="meshes/window_enkel_002-itu_metal-001.ply"/>
-		<boolean name="face_normals" value="true"/>
-		<ref id="mat-itu_metal" name="bsdf"/>
-	</shape>
-	<shape type="ply" id="elm__227" name="elm__227">
+	<shape type="ply" id="elm__233" name="elm__233">
 		<string name="filename" value="meshes/Cube_001.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__228" name="elm__228">
+	<shape type="ply" id="elm__234" name="elm__234">
 		<string name="filename" value="meshes/window_enkel_009-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__229" name="elm__229">
+	<shape type="ply" id="elm__235" name="elm__235">
 		<string name="filename" value="meshes/window_enkel_009-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__230" name="elm__230">
+	<shape type="ply" id="elm__236" name="elm__236">
 		<string name="filename" value="meshes/Cube_003.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__231" name="elm__231">
+	<shape type="ply" id="elm__237" name="elm__237">
 		<string name="filename" value="meshes/Cube_004.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__232" name="elm__232">
-		<string name="filename" value="meshes/Cube_012.ply"/>
+	<shape type="ply" id="elm__238" name="elm__238">
+		<string name="filename" value="meshes/Cube_012-itu_brick.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__233" name="elm__233">
+	<shape type="ply" id="elm__239" name="elm__239">
+		<string name="filename" value="meshes/Cube_012-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__240" name="elm__240">
+		<string name="filename" value="meshes/Cube_012-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__241" name="elm__241">
 		<string name="filename" value="meshes/Cube_002-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__234" name="elm__234">
+	<shape type="ply" id="elm__242" name="elm__242">
 		<string name="filename" value="meshes/Cube_002-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__235" name="elm__235">
-		<string name="filename" value="meshes/Cube_006.ply"/>
+	<shape type="ply" id="elm__243" name="elm__243">
+		<string name="filename" value="meshes/window_enkel_001-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__244" name="elm__244">
+		<string name="filename" value="meshes/window_enkel_001-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__245" name="elm__245">
+		<string name="filename" value="meshes/window_enkel_004-itu_glass.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__246" name="elm__246">
+		<string name="filename" value="meshes/window_enkel_004-itu_metal.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__247" name="elm__247">
+		<string name="filename" value="meshes/Cube_005.ply"/>
+		<boolean name="face_normals" value="true"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
+	</shape>
+	<shape type="ply" id="elm__248" name="elm__248">
+		<string name="filename" value="meshes/Cube_007.ply"/>
 		<boolean name="face_normals" value="true"/>
 		<ref id="mat-itu_brick" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__237" name="elm__237">
-		<string name="filename" value="meshes/Cube_005.ply"/>
+	<shape type="ply" id="elm__249" name="elm__249">
+		<string name="filename" value="meshes/window_enkel_006-itu_glass.ply"/>
 		<boolean name="face_normals" value="true"/>
-		<ref id="default-bsdf" name="bsdf"/>
+		<ref id="mat-itu_glass" name="bsdf"/>
 	</shape>
-	<shape type="ply" id="elm__238" name="elm__238">
-		<string name="filename" value="meshes/Cylinder.ply"/>
+	<shape type="ply" id="elm__250" name="elm__250">
+		<string name="filename" value="meshes/window_enkel_006-itu_metal.ply"/>
 		<boolean name="face_normals" value="true"/>
-		<ref id="default-bsdf" name="bsdf"/>
+		<ref id="mat-itu_metal" name="bsdf"/>
 	</shape>
 
 <!-- Volumes -->
