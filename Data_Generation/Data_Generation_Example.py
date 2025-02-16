@@ -134,19 +134,6 @@ for idx in range(num_runs):
         a = np.concatenate([a, a_], axis=3)
         tau = np.concatenate([tau, tau_], axis=2)
 
-del cm # Free memory
-
-# Exchange the num_tx and batchsize dimensions
-a = np.transpose(a, [3, 1, 2, 0, 4, 5, 6])
-tau = np.transpose(tau, [2, 1, 0, 3])
-
-# Remove CIRs that have no active link (i.e., a is all-zero)
-p_link = np.sum(np.abs(a)**2, axis=(1,2,3,4,5,6))
-a = a[p_link>0.,...]
-tau = tau[p_link>0.,...]
-
-print("Shape of a:", a.shape)
-print("Shape of tau: ", tau.shape)
 
 
 class CIRGenerator:
@@ -219,7 +206,7 @@ class CIRGenerator:
 
 """We use Sionna's built-in [CIRDataset](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.CIRDataset) to initialize a channel model that can be directly used in Sionna's [OFDMChannel](https://nvlabs.github.io/sionna/api/channel.wireless.html#sionna.channel.OFDMChannel) layer."""
 
-batch_size = 20 # Must be the same for the BER simulations as CIRDataset returns fixed batch_size
+batch_size = 20
 
 # Init CIR generator
 cir_generator = CIRGenerator(a,tau,num_tx)
