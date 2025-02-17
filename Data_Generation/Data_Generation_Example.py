@@ -70,7 +70,14 @@ for i in range(len(ue_positions)):
     # compute the path for that receiver
     paths = scene.compute_paths(max_depth=4)
     # convert the paths to dictionary for data storage
+    path_dict_array = {}
     path_dict = paths.to_dict()
+    # TODO convert the path_dict to a dictionary with numpy arrays
+    # for instance path_dict_array['path_1'] = path_dict['path_1'].numpy()
+    # we need to do this for all the keys in the path_dict
+    # we also need to confirm that data at every level are numpy arrays
+    
+    
     # append the path data to the position, which is the key of the dictionary
     #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
     position_key = i
