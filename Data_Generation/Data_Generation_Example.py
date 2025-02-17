@@ -70,6 +70,7 @@ for i in range(len(ue_positions)):
     scene.add(rx)
     # compute the path for that receiver
     paths = scene.compute_paths(max_depth=4)
+    '''
     # mask : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.bool
     #   Set to `False` for non-existent paths.
     #   When there are multiple transmitters or receivers, path counts may vary between links. This is used to identify non-existent paths.
@@ -115,6 +116,7 @@ for i in range(len(ue_positions)):
     #     - 1 : Reflected
     #     - 2 : Diffracted
     #     - 3 : Scattered
+    '''
 
     # convert the paths to dictionary for data storage
     path_dict_array = {}
@@ -142,11 +144,14 @@ for i in range(len(ue_positions)):
     # Default parameters in the PUSCHConfig
     subcarrier_spacing = 15e3
     fft_size = 48
-    # Apply Doppler shifts
-    paths.apply_doppler(sampling_frequency=subcarrier_spacing, # Set to 15e3 Hz
-                    num_time_steps=14, # Number of OFDM symbols
-                    tx_velocities=[3.,0,0], # We can set additional tx speeds
-                    rx_velocities=[0,7.,0]) # Or rx speeds
+    # Apply Doppler shifts if there are velocity
+    # for now, we are not using this
+    # apply_doppler Apply Doppler shifts to all paths according to the velocities
+    # of objects in the scene as well as the provided transmitter and receiver velocities.
+    #paths.apply_doppler(sampling_frequency=subcarrier_spacing, # Set to 15e3 Hz
+    #                num_time_steps=14, # Number of OFDM symbols
+    #                tx_velocities=[3.,0,0], # We can set additional tx speeds
+    #                rx_velocities=[0,7.,0]) # Or rx speeds
 
 
     a, tau = paths.cir()
@@ -161,6 +166,21 @@ for i in range(len(ue_positions)):
     frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
 
     # Compute the frequency response of the channel at frequencies.
+    '''
+    Dimensions
+    a : [batch size, num_rx, num_rx_ant, num_tx, num_tx_ant, num_paths, num_time_steps], tf.complex
+        Path coefficients
+
+    tau : [batch size, num_rx, num_tx, num_paths] or [batch size, num_rx, num_rx_ant, num_tx, num_tx_ant, num_paths], tf.float
+        Path delays
+
+    normalize : bool
+        If set to `True`, the channel is normalized over the resource grid
+        to ensure unit average energy per resource element. Defaults to `False`.
+
+    h_f : [batch size, num_rx, num_rx_ant, num_tx, num_tx_ant, num_time_steps, fft_size], tf.complex
+        Channel frequency responses at ``frequencies``
+    '''
     h_freq = cir_to_ofdm_channel(frequencies,
                              a,
                              tau,
