@@ -41,9 +41,6 @@ scene.add(my_cam)
 scene.add(rx)
 
 
-
-
-
 # Iterate through time steps
 frame_files = []
 for t in range(time_steps):
