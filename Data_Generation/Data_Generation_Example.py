@@ -69,6 +69,52 @@ for i in range(len(ue_positions)):
     scene.add(rx)
     # compute the path for that receiver
     paths = scene.compute_paths(max_depth=4)
+    # mask : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.bool
+    #   Set to `False` for non-existent paths.
+    #   When there are multiple transmitters or receivers, path counts may vary between links. This is used to identify non-existent paths.
+    #   For such paths, the channel coefficient is set to `0` and the delay to `-1`.
+
+    # a : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths, num_time_steps], tf.complex
+    #     Channel coefficients :math:`a_i` as defined in :eq:`T_tilde`.
+    #     If there are less than `max_num_path` valid paths between a
+    #     transmit and receive antenna, the irrelevant elements are
+    #     filled with zeros.
+
+    # tau : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.float
+    #     Propagation delay of each path [s].
+    #     If :attr:`~sionna.rt.Scene.synthetic_array` is `True`, the shape of this tensor
+    #     is `[1, num_rx, num_tx, max_num_paths]` as the delays for the
+    #     individual antenna elements are assumed to be equal.
+    #     If there are less than `max_num_path` valid paths between a
+    #     transmit and receive antenna, the irrelevant elements are
+    #     filled with -1.
+
+    # theta_t : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.float
+    #     Zenith  angles of departure :math:`\theta_{\text{T},i}` [rad].
+    #     If :attr:`~sionna.rt.Scene.synthetic_array` is `True`, the shape of this tensor
+    #     is `[1, num_rx, num_tx, max_num_paths]` as the angles for the
+    #     individual antenna elements are assumed to be equal.
+
+    # phi_t : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.float
+    #     Azimuth angles of departure :math:`\varphi_{\text{T},i}` [rad].
+    #     See description of ``theta_t``.
+
+    # theta_r : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.float
+    #     Zenith angles of arrival :math:`\theta_{\text{R},i}` [rad].
+    #     See description of ``theta_t``.
+
+    # phi_r : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.float
+    #     Azimuth angles of arrival :math:`\varphi_{\text{T},i}` [rad].
+    #     See description of ``theta_t``.
+
+    # types : [batch_size, max_num_paths], tf.int
+    #     Type of path:
+
+    #     - 0 : LoS
+    #     - 1 : Reflected
+    #     - 2 : Diffracted
+    #     - 3 : Scattered
+
     # convert the paths to dictionary for data storage
     path_dict_array = {}
     path_dict = paths.to_dict()
