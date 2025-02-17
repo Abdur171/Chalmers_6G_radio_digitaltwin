@@ -50,6 +50,7 @@ scene.add(tx6)
 
 # initiate the path data dictionary
 path_data = {}
+path_data_array = {}
 # initiate the CIR data dictionary
 # notice that they are separated because they are going to be used by different people
 h_freqency_data = {}
@@ -122,12 +123,21 @@ for i in range(len(ue_positions)):
     # for instance path_dict_array['path_1'] = path_dict['path_1'].numpy()
     # we need to do this for all the keys in the path_dict
     # we also need to confirm that data at every level are numpy arrays
-    
+    path_dict_array['mask'] = path_dict['mask'].numpy()
+    path_dict_array['a'] = path_dict['a'].numpy()
+    path_dict_array['tau'] = path_dict['tau'].numpy()
+    path_dict_array['theta_t'] = path_dict['theta_t'].numpy()
+    path_dict_array['phi_t'] = path_dict['phi_t'].numpy()
+    path_dict_array['theta_r'] = path_dict['theta_r'].numpy()
+    path_dict_array['phi_r'] = path_dict['phi_r'].numpy()
+    path_dict_array['types'] = path_dict['types'].numpy()
+
     
     # append the path data to the position, which is the key of the dictionary
     #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
     position_key = i
     path_data[position_key]=path_dict
+    path_data_array[position_key]=path_dict_array
 
     # Default parameters in the PUSCHConfig
     subcarrier_spacing = 15e3
@@ -200,6 +210,9 @@ with open("h_avg_power_data.pkl", "wb") as f:
 # Save the path data
 with open("path_data.pkl", "wb") as f:
     pickle.dump(path_data, f)
+# Save the path data array
+with open("path_data_array.json", "wb") as f:
+    pickle.dump(path_data_array, f)
 
 
 
