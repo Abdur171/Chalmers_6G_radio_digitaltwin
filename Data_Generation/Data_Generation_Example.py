@@ -4,6 +4,7 @@ import os
 
 import tensorflow as tf
 import sionna
+import pickle
 
 # Set random seed for reproducibility
 sionna.config.seed = 42
@@ -110,15 +111,42 @@ for i in range(len(ue_positions)):
     # remove the rx from the scene
     scene.remove(f"rx-{i}")
 
-# Save the path data
-with open("path_data.json", "w") as f:
-    json.dump(path_data, f)
+def make_hashable(item):
+    """
+    Recursively convert an item to a hashable representation.
+    - tf.Tensor: converts to a Python scalar or tuple.
+    - list: converts to a tuple.
+    - dict: converts to a tuple of sorted key-value pairs.
+    - Other types are returned as is.
+    """
+    if isinstance(item, tf.Tensor):
+        # Convert the EagerTensor to a numpy array.
+        arr = item.numpy()
+        # If it's a scalar, return the Python scalar.
+        if arr.ndim == 0:
+            return arr.item()
+        # Otherwise, convert the array to a tuple.
+        else:
+            return tuple(arr.tolist())
+    elif isinstance(item, list):
+        return tuple(make_hashable(elem) for elem in item)
+    elif isinstance(item, dict):
+        # Sort the keys to ensure consistent ordering.
+        return tuple((k, make_hashable(item[k])) for k in sorted(item))
+    else:
+        return item
+#h_freqency_data = {make_hashable(k): v for k, v in h_freqency_data.items()}
+#h_avg_power_data = {make_hashable(k): v for k, v in h_avg_power_data.items()}
+#path_data = {make_hashable(k): v for k, v in path_data.items()}
 # Save the h_frequency data
-with open("h_frequency_data.json", "w") as f:
-    json.dump(h_freqency_data, f)
+with open("h_frequency_data.pkl", "wb") as f:
+    pickle.dump(h_freqency_data, f)
 # Save the h_avg_power_data
-with open("h_avg_power_data.json", "w") as f:
-    json.dump(h_avg_power_data, f)
+with open("h_avg_power_data.pkl", "wb") as f:
+    pickle.dump(h_avg_power_data, f)
+# Save the path data
+with open("path_data.pkl", "wb") as f:
+    pickle.dump(path_data, f)
 
 
 
