@@ -59,6 +59,7 @@ h_avg_power_data = {}
 ue_grid= []
 ue_grid= [[10, 1.4, 1.2], [10, 1, 1]]
 # Define the grid for the UE positions
+# EVENTUALLY THIS SHOULD BE OBTAINED FROM A DATA FILE
 # TODO: Define the grid for the UE positions at 50cm resolution for now
 # This grid should be obtained from Blender
 #ue_positions = tf.squeeze(ue_grid)
@@ -144,21 +145,11 @@ for i in range(len(ue_positions)):
     # Default parameters in the PUSCHConfig
     subcarrier_spacing = 15e3
     fft_size = 48
-    # Apply Doppler shifts if there are velocity
-    # for now, we are not using this
-    # apply_doppler Apply Doppler shifts to all paths according to the velocities
-    # of objects in the scene as well as the provided transmitter and receiver velocities.
-    #paths.apply_doppler(sampling_frequency=subcarrier_spacing, # Set to 15e3 Hz
-    #                num_time_steps=14, # Number of OFDM symbols
-    #                tx_velocities=[3.,0,0], # We can set additional tx speeds
-    #                rx_velocities=[0,7.,0]) # Or rx speeds
-
-
     a, tau = paths.cir()
     # Disable normalization of delays
-    paths.normalize_delays = False
+    #paths.normalize_delays = False
     # Get only the LoS path
-    _, tau = paths.cir(los=True, reflection=False)
+    #_, tau = paths.cir(los=True, reflection=False)
 
     paths.normalize_delays = True
     _, tau = paths.cir(los=True, reflection=True, diffraction=False, scattering=False)
@@ -181,11 +172,7 @@ for i in range(len(ue_positions)):
     h_f : [batch size, num_rx, num_rx_ant, num_tx, num_tx_ant, num_time_steps, fft_size], tf.complex
         Channel frequency responses at ``frequencies``
     '''
-    h_freq = cir_to_ofdm_channel(frequencies,
-                             a,
-                             tau,
-                             normalize=True) # Non-normalized includes path-loss
-
+    h_freq = cir_to_ofdm_channel(frequencies,a,tau,normalize=True) # Non-normalized includes path-loss
     # Verify that the channel power is normalized
     h_avg_power = tf.reduce_mean(tf.abs(h_freq)**2).numpy()
     h_freqency_data[position_key] = h_freq.numpy()
