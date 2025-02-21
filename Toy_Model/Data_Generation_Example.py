@@ -54,9 +54,9 @@ path_data_array = {}
 # notice that they are separated because they are going to be used by different people
 h_freqency_data = {}
 h_avg_power_data = {}
-file_path = "Toy_Model/grid_points_toy_1x1.csv"
-grid_position = pd.read_csv(file_path)
-ue_grid = grid_position[['X','Y','Z']].values.tolist()
+#file_path = "Toy_Model/grid_points_toy_1x1.csv"
+#grid_position = pd.read_csv(file_path)
+ue_grid = [[10, 1.4, 1.2], [10, 1, 1]]
 ue_positions = tf.squeeze(ue_grid)
 # Create batch_size receivers for the data generation
 for i in range(len(ue_positions)):
@@ -133,7 +133,7 @@ for i in range(len(ue_positions)):
     # append the path data to the position, which is the key of the dictionary
     #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
     # TODO can we use position instead of position_key as key? that would be the best
-    position_key = i
+    position_key = tuple(ue_grid[i])
     path_data[position_key]=path_dict
     path_data_array[position_key]=path_dict_array
 
