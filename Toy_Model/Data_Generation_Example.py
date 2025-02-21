@@ -244,3 +244,7 @@ for key in h_avg_power_data.keys():
 
 # Convert the list of dictionaries into a pandas DataFrame.
 df = pd.DataFrame(data_combined)
+df.to_csv("all_data.csv", index=True)
+df.to_json("all_data.json", orient="records")
+
+
