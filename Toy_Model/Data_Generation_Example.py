@@ -54,20 +54,9 @@ path_data_array = {}
 # notice that they are separated because they are going to be used by different people
 h_freqency_data = {}
 h_avg_power_data = {}
-# define a grid of positions for data collection
-#ue_grid= []
-#ue_grid= [[10, 1.4, 1.2], [10, 1, 1]]
-# Replace 'grid_points.csv' with the path to your CSV file.
-file_path = "Toy_Model/grid_points_toy.csv"
-    
-# Read the CSV file into a DataFrame.
-data = pd.read_csv(file_path)
-ue_grid = data[['X','Y','Z']].values.tolist()[0:10]
-# Define the grid for the UE positions
-# EVENTUALLY THIS SHOULD BE OBTAINED FROM A DATA FILE
-# TODO: Define the grid for the UE positions at 50cm resolution for now
-# This grid should be obtained from Blender
-#ue_positions = tf.squeeze(ue_grid)
+file_path = "Toy_Model/grid_points_toy_1x1.csv"
+grid_position = pd.read_csv(file_path)
+ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 # Create batch_size receivers for the data generation
 for i in range(len(ue_positions)):
@@ -185,46 +174,6 @@ for i in range(len(ue_positions)):
 
     # remove the rx from the scene
     scene.remove(f"rx-{i}")
-
-def make_hashable(item):
-    """
-    Recursively convert an item to a hashable representation.
-    - tf.Tensor: converts to a Python scalar or tuple.
-    - list: converts to a tuple.
-    - dict: converts to a tuple of sorted key-value pairs.
-    - Other types are returned as is.
-    """
-    if isinstance(item, tf.Tensor):
-        # Convert the EagerTensor to a numpy array.
-        arr = item.numpy()
-        # If it's a scalar, return the Python scalar.
-        if arr.ndim == 0:
-            return arr.item()
-        # Otherwise, convert the array to a tuple.
-        else:
-            return tuple(arr.tolist())
-    elif isinstance(item, list):
-        return tuple(make_hashable(elem) for elem in item)
-    elif isinstance(item, dict):
-        # Sort the keys to ensure consistent ordering.
-        return tuple((k, make_hashable(item[k])) for k in sorted(item))
-    else:
-        return item
-#h_freqency_data = {make_hashable(k): v for k, v in h_freqency_data.items()}
-#h_avg_power_data = {make_hashable(k): v for k, v in h_avg_power_data.items()}
-#path_data = {make_hashable(k): v for k, v in path_data.items()}
-# Save the h_frequency data
-#with open("h_frequency_data.pkl", "wb") as f:
-#    pickle.dump(h_freqency_data, f)
-# Save the h_avg_power_data
-#with open("h_avg_power_data.pkl", "wb") as f:
-#    pickle.dump(h_avg_power_data, f)
-# Save the path data
-#with open("path_data.pkl", "wb") as f:
-#    pickle.dump(path_data, f)
-# Save the path data array
-#with open("path_data_array.json", "wb") as f:
-#    pickle.dump(path_data_array, f)
 
 # Create a list to hold the combined data for each position key.
 data_combined = []
