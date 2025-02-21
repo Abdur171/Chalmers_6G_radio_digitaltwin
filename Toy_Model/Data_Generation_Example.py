@@ -217,17 +217,30 @@ def make_hashable(item):
 #h_avg_power_data = {make_hashable(k): v for k, v in h_avg_power_data.items()}
 #path_data = {make_hashable(k): v for k, v in path_data.items()}
 # Save the h_frequency data
-with open("h_frequency_data.pkl", "wb") as f:
-    pickle.dump(h_freqency_data, f)
+#with open("h_frequency_data.pkl", "wb") as f:
+#    pickle.dump(h_freqency_data, f)
 # Save the h_avg_power_data
-with open("h_avg_power_data.pkl", "wb") as f:
-    pickle.dump(h_avg_power_data, f)
+#with open("h_avg_power_data.pkl", "wb") as f:
+#    pickle.dump(h_avg_power_data, f)
 # Save the path data
-with open("path_data.pkl", "wb") as f:
-    pickle.dump(path_data, f)
+#with open("path_data.pkl", "wb") as f:
+#    pickle.dump(path_data, f)
 # Save the path data array
-with open("path_data_array.json", "wb") as f:
-    pickle.dump(path_data_array, f)
+#with open("path_data_array.json", "wb") as f:
+#    pickle.dump(path_data_array, f)
 
+# Create a list to hold the combined data for each position key.
+data_combined = []
 
+# Assuming all dictionaries (h_avg_power_data, h_frequency_data, path_data, path_data_array)
+for key in h_avg_power_data.keys():
+    pos_data = {
+        "position": key,
+        "h_avg_power": h_avg_power_data.get(key),
+        "h_frequency_data": h_frequency_data.get(key),
+        "path_data": path_data.get(key),
+    }
+    data_combined.append(pos_data)
 
+# Convert the list of dictionaries into a pandas DataFrame.
+df = pd.DataFrame(data_combined)
