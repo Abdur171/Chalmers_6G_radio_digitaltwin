@@ -58,14 +58,11 @@ h_avg_power_data = {}
 #ue_grid= []
 #ue_grid= [[10, 1.4, 1.2], [10, 1, 1]]
 # Replace 'grid_points.csv' with the path to your CSV file.
-file_path = "Toy model/grid_points_toy.csv"
+file_path = "Toy_Model/grid_points_toy.csv"
     
 # Read the CSV file into a DataFrame.
 data = pd.read_csv(file_path)
-X = data['X']
-Y = data['Y']
-Z = data['Z']
-
+ue_grid = data[['X','Y','Z']].values.tolist()[0:10]
 # Define the grid for the UE positions
 # EVENTUALLY THIS SHOULD BE OBTAINED FROM A DATA FILE
 # TODO: Define the grid for the UE positions at 50cm resolution for now
@@ -237,7 +234,7 @@ for key in h_avg_power_data.keys():
     pos_data = {
         "position": key,
         "h_avg_power": h_avg_power_data.get(key),
-        "h_frequency_data": h_frequency_data.get(key),
+        "h_frequency_data": h_freqency_data.get(key),
         "path_data": path_data.get(key),
     }
     data_combined.append(pos_data)
@@ -245,6 +242,5 @@ for key in h_avg_power_data.keys():
 # Convert the list of dictionaries into a pandas DataFrame.
 df = pd.DataFrame(data_combined)
 df.to_csv("all_data.csv", index=True)
-df.to_json("all_data.json", orient="records")
 
 

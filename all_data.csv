@@ -1,0 +1,781 @@
+,position,h_avg_power,h_frequency_data,path_data
+0,0,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-4.5543598e+01, -9.2690697e+00,  3.7376404e-02]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+1,1,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-97.19027 ,  60.282803,   0.      ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+2,2,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-96.99905 ,  60.744793,   0.      ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+3,3,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-96.80782 ,  61.206783,   0.      ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+4,4,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-96.61661,  61.66877,   0.     ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+5,5,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-96.425385,  62.13076 ,   0.      ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+6,6,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-96.23416,  62.59275,   0.     ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+7,7,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-96.04294,  63.05474,   0.     ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+8,8,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-95.851715,  63.51673 ,   0.      ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
+9,9,0.0,"[[[[[[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]
+
+
+    [[[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     ...
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]
+
+     [[0.+0.j 0.+0.j 0.+0.j ... 0.+0.j 0.+0.j 0.+0.j]]]]]]]","{'a': <tf.Tensor: shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64, numpy=array([], shape=(1, 1, 1, 5, 16, 0, 1), dtype=complex64)>, 'doppler': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'mask': <tf.Tensor: shape=(1, 1, 5, 0), dtype=bool, numpy=array([], shape=(1, 1, 5, 0), dtype=bool)>, 'min_tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'normalize_delays': True, 'objects': <tf.Tensor: shape=(0, 1, 5, 0), dtype=int32, numpy=array([], shape=(0, 1, 5, 0), dtype=int32)>, 'phi_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'phi_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'reverse_direction': False, 'sources': <tf.Tensor: shape=(5, 3), dtype=float32, numpy=
+array([[   0.5, -343. ,   30. ],
+       [  65. , -181.5,   35. ],
+       [  22. ,  182. ,   28. ],
+       [-147. ,  327. ,   28. ],
+       [-212. ,  -33. ,   15. ]], dtype=float32)>, 'targets': <tf.Tensor: shape=(1, 3), dtype=float32, numpy=array([[-95.6605  ,  63.978718,   0.      ]], dtype=float32)>, 'targets_sources_mask': <tf.Tensor: shape=(1, 5, 0), dtype=bool, numpy=array([], shape=(1, 5, 0), dtype=bool)>, 'tau': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_r': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'theta_t': <tf.Tensor: shape=(1, 1, 5, 0), dtype=float32, numpy=array([], shape=(1, 1, 5, 0), dtype=float32)>, 'types': <tf.Tensor: shape=(1, 0), dtype=int32, numpy=array([], shape=(1, 0), dtype=int32)>, 'vertices': <tf.Tensor: shape=(0, 1, 5, 0, 3), dtype=float32, numpy=array([], shape=(0, 1, 5, 0, 3), dtype=float32)>}"
