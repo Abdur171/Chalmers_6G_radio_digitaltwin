@@ -138,6 +138,7 @@ for i in range(len(ue_positions)):
     
     # append the path data to the position, which is the key of the dictionary
     #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
+    # TODO can we use position instead of position_key as key? that would be the best
     position_key = i
     path_data[position_key]=path_dict
     path_data_array[position_key]=path_dict_array
