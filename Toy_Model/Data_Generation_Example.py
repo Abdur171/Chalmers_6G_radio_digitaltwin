@@ -59,7 +59,7 @@ grid_position = pd.read_csv(file_path)
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 # Create batch_size receivers for the data generation
-for i in range(len(ue_positions)):
+for i in range(len(ue_positions[0:6])): # only the first five positions for debugging purposes, we later change this 
     rx = Receiver(name=f"rx-{i}",
                   position=ue_positions[i])
     scene.add(rx)
@@ -120,16 +120,16 @@ for i in range(len(ue_positions)):
     # for instance path_dict_array['path_1'] = path_dict['path_1'].numpy()
     # we need to do this for all the keys in the path_dict
     # we also need to confirm that data at every level are numpy arrays
-    path_dict_array['mask'] = path_dict['mask'].numpy()
-    path_dict_array['a'] = path_dict['a'].numpy()
-    path_dict_array['tau'] = path_dict['tau'].numpy()
-    path_dict_array['theta_t'] = path_dict['theta_t'].numpy()
-    path_dict_array['phi_t'] = path_dict['phi_t'].numpy()
-    path_dict_array['theta_r'] = path_dict['theta_r'].numpy()
-    path_dict_array['phi_r'] = path_dict['phi_r'].numpy()
-    path_dict_array['types'] = path_dict['types'].numpy()
-
+    # Convert all TensorFlow tensors in path_dict to numpy arrays
+    for keys in path_dict:
+        if isinstance(path_dict[keys], tf.Tensor) and not path_dict[keys].dtype.is_complex:
+            path_dict_array[keys] = tf.cast(path_dict[keys], tf.float64).numpy()
+        elif isinstance(path_dict[keys], tf.Tensor):
+            path_dict_array[keys] = path_dict[keys].numpy()
+        else:
+            path_dict_array[keys] = path_dict[keys]
     
+
     # append the path data to the position, which is the key of the dictionary
     #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
     # TODO can we use position instead of position_key as key? that would be the best
@@ -185,12 +185,10 @@ for key in h_avg_power_data.keys():
         "position": key,
         "h_avg_power": h_avg_power_data.get(key),
         "h_frequency_data": h_freqency_data.get(key),
-        "path_data": path_data.get(key),
+        "path_data": path_data_array.get(key),
     }
     data_combined.append(pos_data)
 
 # Convert the list of dictionaries into a pandas DataFrame.
 df = pd.DataFrame(data_combined)
 df.to_csv("all_data.csv", index=True)
-
-
