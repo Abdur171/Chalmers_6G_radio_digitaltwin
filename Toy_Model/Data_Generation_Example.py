@@ -29,11 +29,18 @@ import copy
 
 # Load integrated scene from the xml file
 scene = load_scene("Data_Generation/V2_XML/chalmers_map_v2.xml")
+# Set the carrier frequency 
+fc = 3.5e9 # from band n78 in 3GPP TS 38.104. Can be changed later when testing out mmWave or sub-THz
+scene.frequency = fc
+# Define the wavelength of the signal and calculate the antenna distance 
+Lambda = 1/fc
+antenna_dist = Lambda/2
 # Configure antenna array for all transmitters
-scene.tx_array = PlanarArray(num_rows=4, num_cols=4, vertical_spacing=0.5,horizontal_spacing=0.5, pattern="tr38901",polarization="V")
+scene.tx_array = PlanarArray(num_rows=4, num_cols=4, vertical_spacing=0.5, horizontal_spacing=0.5, pattern="tr38901", polarization="cross") # changed it to cross-polarization as described in 3GPP TR 38.901
 # Configure antenna array for all receivers
-scene.rx_array = PlanarArray(num_rows=1, num_cols=1, vertical_spacing=0.5,horizontal_spacing=0.5, pattern="iso",polarization="V")
-# Create transmitter
+scene.rx_array = PlanarArray(num_rows=2, num_cols=2, vertical_spacing=antenna_dist, horizontal_spacing=antenna_dist, pattern="iso", polarization="V")
+# Create transmitter 
+# TODO determine appropriate locations of the transmitters
 tx2 = Transmitter("tx2", [0.5, -343, 30], [0.0, 0.0, 0.0])   #Chalmers coordinates
 scene.add(tx2)
 tx3 = Transmitter("tx3", [65, -181.5, 35], [0.0, 0.0, 0.0])  #Chalmers coordinates
@@ -54,7 +61,8 @@ path_data_array = {}
 # notice that they are separated because they are going to be used by different people
 h_freqency_data = {}
 h_avg_power_data = {}
-file_path = "Toy_Model/grid_points_toy_1x1.csv"
+# TODO generate 1 by 1 grid for the entire campus 
+file_path = "Toy_Model/grid_points_toy_1x1.csv" 
 grid_position = pd.read_csv(file_path)
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
@@ -64,7 +72,7 @@ for i in range(len(ue_positions[0:6])): # only the first five positions for debu
                   position=ue_positions[i])
     scene.add(rx)
     # compute the path for that receiver
-    paths = scene.compute_paths(max_depth=4)
+    paths = scene.compute_paths(max_depth=4, diffraction = False, scattering = False) # Added diffraction and scattering effects, can be changed later
     '''
     # mask : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.bool
     #   Set to `False` for non-existent paths.
