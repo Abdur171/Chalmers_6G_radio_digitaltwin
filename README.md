@@ -21,6 +21,3 @@ Questions:
 
 Extra:
 1. Add trajectories
-2. Add collision avoidance
-   ![1](collision_avoidance.gif)
-     
