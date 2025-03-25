@@ -29,11 +29,18 @@ import copy
 
 # Load integrated scene from the xml file
 scene = load_scene("Data_Generation/V2_XML/chalmers_map_v2.xml")
+# Set the carrier frequency 
+fc = 3.5e9 # from band n78 in 3GPP TS 38.104. Can be changed later when testing out mmWave or sub-THz
+scene.frequency = fc
+# Define the wavelength of the signal and calculate the antenna distance 
+Lambda = 1/fc
+antenna_dist = Lambda/2
 # Configure antenna array for all transmitters
-scene.tx_array = PlanarArray(num_rows=4, num_cols=4, vertical_spacing=0.5,horizontal_spacing=0.5, pattern="tr38901",polarization="V")
+scene.tx_array = PlanarArray(num_rows=4, num_cols=4, vertical_spacing=0.5, horizontal_spacing=0.5, pattern="tr38901", polarization="cross") # changed it to cross-polarization as described in 3GPP TR 38.901
 # Configure antenna array for all receivers
-scene.rx_array = PlanarArray(num_rows=1, num_cols=1, vertical_spacing=0.5,horizontal_spacing=0.5, pattern="iso",polarization="V")
-# Create transmitter
+scene.rx_array = PlanarArray(num_rows=2, num_cols=2, vertical_spacing=antenna_dist, horizontal_spacing=antenna_dist, pattern="iso", polarization="V")
+# Create transmitter 
+# TODO determine appropriate locations of the transmitters
 tx2 = Transmitter("tx2", [0.5, -343, 30], [0.0, 0.0, 0.0])   #Chalmers coordinates
 scene.add(tx2)
 tx3 = Transmitter("tx3", [65, -181.5, 35], [0.0, 0.0, 0.0])  #Chalmers coordinates
@@ -54,17 +61,18 @@ path_data_array = {}
 # notice that they are separated because they are going to be used by different people
 h_freqency_data = {}
 h_avg_power_data = {}
-file_path = "Toy_Model/grid_points_toy_1x1.csv"
+# TODO generate 1 by 1 grid for the entire campus 
+file_path = "Toy_Model/grid_points_toy_1x1.csv" 
 grid_position = pd.read_csv(file_path)
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 # Create batch_size receivers for the data generation
-for i in range(len(ue_positions)):
+for i in range(len(ue_positions[0:6])): # only the first five positions for debugging purposes, we later change this 
     rx = Receiver(name=f"rx-{i}",
                   position=ue_positions[i])
     scene.add(rx)
     # compute the path for that receiver
-    paths = scene.compute_paths(max_depth=4)
+    paths = scene.compute_paths(max_depth=4, diffraction = False, scattering = False) # Added diffraction and scattering effects, can be changed later
     '''
     # mask : [batch_size, num_rx, num_rx_ant, num_tx, num_tx_ant, max_num_paths] or [batch_size, num_rx, num_tx, max_num_paths], tf.bool
     #   Set to `False` for non-existent paths.
@@ -120,20 +128,20 @@ for i in range(len(ue_positions)):
     # for instance path_dict_array['path_1'] = path_dict['path_1'].numpy()
     # we need to do this for all the keys in the path_dict
     # we also need to confirm that data at every level are numpy arrays
-    path_dict_array['mask'] = path_dict['mask'].numpy()
-    path_dict_array['a'] = path_dict['a'].numpy()
-    path_dict_array['tau'] = path_dict['tau'].numpy()
-    path_dict_array['theta_t'] = path_dict['theta_t'].numpy()
-    path_dict_array['phi_t'] = path_dict['phi_t'].numpy()
-    path_dict_array['theta_r'] = path_dict['theta_r'].numpy()
-    path_dict_array['phi_r'] = path_dict['phi_r'].numpy()
-    path_dict_array['types'] = path_dict['types'].numpy()
-
+    # Convert all TensorFlow tensors in path_dict to numpy arrays
+    for keys in path_dict:
+        if isinstance(path_dict[keys], tf.Tensor) and not path_dict[keys].dtype.is_complex:
+            path_dict_array[keys] = tf.cast(path_dict[keys], tf.float64).numpy()
+        elif isinstance(path_dict[keys], tf.Tensor):
+            path_dict_array[keys] = path_dict[keys].numpy()
+        else:
+            path_dict_array[keys] = path_dict[keys]
     
+
     # append the path data to the position, which is the key of the dictionary
     #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
     # TODO can we use position instead of position_key as key? that would be the best
-    position_key = i
+    position_key = tuple(ue_grid[i])
     path_data[position_key]=path_dict
     path_data_array[position_key]=path_dict_array
 
@@ -185,12 +193,10 @@ for key in h_avg_power_data.keys():
         "position": key,
         "h_avg_power": h_avg_power_data.get(key),
         "h_frequency_data": h_freqency_data.get(key),
-        "path_data": path_data.get(key),
+        "path_data": path_data_array.get(key),
     }
     data_combined.append(pos_data)
 
 # Convert the list of dictionaries into a pandas DataFrame.
 df = pd.DataFrame(data_combined)
 df.to_csv("all_data.csv", index=True)
-
-
