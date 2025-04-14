@@ -1,0 +1,42 @@
+Attribute,Type,Shape,Value (repr)
+a,tuple,N/A,"([[[[[],
+    [],
+    [],
+    .. 26 skipped ..,
+    [],
+    [],
+    []]],
+  [[[],
+    [],
+    [],
+   ..."
+doppler,TensorXf,"(1, 1, 0)",[[[]]]
+interactions,TensorXu,"(4, 1, 1, 0)","[[[[]]],
+ [[[]]],
+ [[[]]],
+ [[[]]]]"
+num_rx,int,N/A,1
+num_tx,int,N/A,1
+objects,TensorXu,"(4, 1, 1, 0)","[[[[]]],
+ [[[]]],
+ [[[]]],
+ [[[]]]]"
+phi_r,TensorXf,"(1, 1, 0)",[[[]]]
+phi_t,TensorXf,"(1, 1, 0)",[[[]]]
+primitives,TensorXu,"(4, 1, 1, 0)","[[[[]]],
+ [[[]]],
+ [[[]]],
+ [[[]]]]"
+rx_array,PlanarArray,N/A,<sionna.rt.antenna_array.PlanarArray object at 0x00000227DD8F1390>
+sources,Point3f,"(3, 1)","[[0.5, -3, 18]]"
+synthetic_array,bool,N/A,True
+targets,Point3f,"(3, 1)","[[-45.5436, -9.26907, 0.0373764]]"
+tau,TensorXf,"(1, 1, 0)",[[[]]]
+theta_r,TensorXf,"(1, 1, 0)",[[[]]]
+theta_t,TensorXf,"(1, 1, 0)",[[[]]]
+tx_array,PlanarArray,N/A,<sionna.rt.antenna_array.PlanarArray object at 0x00000227DDD0EA10>
+valid,TensorXb,"(1, 1, 0)",[[[]]]
+vertices,TensorXf,"(4, 1, 1, 0, 3)","[[[[]]],
+ [[[]]],
+ [[[]]],
+ [[[]]]]"
