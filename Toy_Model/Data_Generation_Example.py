@@ -157,33 +157,6 @@ for i in range(len(ue_positions[0:6])): # only the first five positions for debu
         else:
             path_dict_array[key] = value
 
-    # Flatten the receiver's position into a 1D list of floats 
-    pos_arr = rx.position.numpy()
-    pos_arr = np.squeeze(pos_arr)  # now shape [3], not [1,3]
-    position_key = tuple(pos_arr)
-
-    path_data[position_key] = path_dict
-    path_data_array[position_key] = path_dict_array
-    
-
-
-
-    """# convert the paths to dictionary for data storage
-    path_dict_array = {}
-    path_dict = paths.to_dict()
-    # TODO convert the path_dict to a dictionary with numpy arrays
-    # for instance path_dict_array['path_1'] = path_dict['path_1'].numpy()
-    # we need to do this for all the keys in the path_dict
-    # we also need to confirm that data at every level are numpy arrays
-    # Convert all TensorFlow tensors in path_dict to numpy arrays
-    for keys in path_dict:
-        if isinstance(path_dict[keys], tf.Tensor) and not path_dict[keys].dtype.is_complex:
-            path_dict_array[keys] = tf.cast(path_dict[keys], tf.float64).numpy()
-        elif isinstance(path_dict[keys], tf.Tensor):
-            path_dict_array[keys] = path_dict[keys].numpy()
-        else:
-            path_dict_array[keys] = path_dict[keys]
-    """
 
     
     # append the path data to the position, which is the key of the dictionary
@@ -205,7 +178,7 @@ for i in range(len(ue_positions[0:6])): # only the first five positions for debu
     #_, tau = paths.cir(los=True, reflection=False)
 
     # Retrieve the channel impulse response as tensors 
-    a, tau = paths.cir()
+    tau = paths.cir()
 
     # Compute frequencies of subcarriers and center around carrier frequency
     frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
