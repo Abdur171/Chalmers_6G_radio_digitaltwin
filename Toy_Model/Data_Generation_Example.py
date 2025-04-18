@@ -122,17 +122,52 @@ for i in range(len(ue_positions[0:6])):
             else:
                 organized_params[param] = value
         else:
-            organized_params[param] = None  # Parameter not found
+            path_dict_array[key] = value
 
-    # Use the receiver position as key (flattened to a tuple of coordinates)
-    position_key = tuple(np.squeeze(rx.position.numpy()))
+    # Flatten the receiver's position into a 1D list of floats 
+    pos_arr = rx.position.numpy()
+    pos_arr = np.squeeze(pos_arr)  # now shape [3], not [1,3]
+    position_key = tuple(pos_arr)
+
+    path_data[position_key] = path_dict
+    path_data_array[position_key] = path_dict_array
     
-    # Compute additional channel data (CIR, etc.)
+
+
+
+    """# convert the paths to dictionary for data storage
+    path_dict_array = {}
+    path_dict = paths.to_dict()
+    # TODO convert the path_dict to a dictionary with numpy arrays
+    # for instance path_dict_array['path_1'] = path_dict['path_1'].numpy()
+    # we need to do this for all the keys in the path_dict
+    # we also need to confirm that data at every level are numpy arrays
+    # Convert all TensorFlow tensors in path_dict to numpy arrays
+    for keys in path_dict:
+        if isinstance(path_dict[keys], tf.Tensor) and not path_dict[keys].dtype.is_complex:
+            path_dict_array[keys] = tf.cast(path_dict[keys], tf.float64).numpy()
+        elif isinstance(path_dict[keys], tf.Tensor):
+            path_dict_array[keys] = path_dict[keys].numpy()
+        else:
+            path_dict_array[keys] = path_dict[keys]
+    """
+
+    
+    # append the path data to the position, which is the key of the dictionary
+    #position_key = (ue_positions[i].numpy()[0],ue_positions[i].numpy()[1],ue_positions[i].numpy()[2])
+    # TODO can we use position instead of position_key as key? that would be the best
+    position_key = tuple(ue_grid[i])
+    path_data[position_key]=path_dict
+    path_data_array[position_key]=path_dict_array
+    
+
+
+    # Default parameters in the PUSCHConfig
     subcarrier_spacing = 15e3
     fft_size = 48
 
     # Retrieve the channel impulse response as tensors 
-    a, tau = paths.cir()
+    tau = paths.cir()
 
     # Compute frequencies of subcarriers
     frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
