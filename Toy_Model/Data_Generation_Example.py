@@ -62,34 +62,8 @@ scene.add(tx1)
 # tx6 = Transmitter("tx6", [-212, -33, 15], [0.0, 0.0, 0.0])
 # scene.add(tx6)
 
-<<<<<<< HEAD
-#tx2 = Transmitter("tx2", [0.5, -343, 30], [0.0, 0.0, 0.0])   #Chalmers coordinates
-#scene.add(tx2)
-#tx3 = Transmitter("tx3", [65, -181.5, 35], [0.0, 0.0, 0.0])  #Chalmers coordinates
-#scene.add(tx3)
-#tx4 = Transmitter("tx4", [22, 182, 28], [0.0, 0.0, 0.0])  #Chalmers coordinates
-#scene.add(tx4)
-#tx5 = Transmitter("tx5", [-147, 327, 28], [0.0, 0.0, 0.0])  #Chalmers coordinates
-#scene.add(tx5)
-#tx6 = Transmitter("tx6", [-212, -33, 15], [0.0, 0.0, 0.0])  #Chalmers coordinates
-#scene.add(tx6)
-
-# compute the coverage map which only depend upon the transmitter
-#cm = scene.coverage_map(cm_cell_size=[1,1], num_samples=10e6, diffraction=True, scattering=True)
-
-# initiate the path data dictionary
-path_data = {}
-path_data_array = {}
-# initiate the CIR data dictionary
-# notice that they are separated because they are going to be used by different people
-h_freqency_data = {}
-h_avg_power_data = {}
-# TODO generate 1 by 1 grid for the entire campus 
-file_path = "Undergraduate_Thesis_Project/Toy_Model/grid_points_toy_1x1.csv" 
-=======
 # Load grid positions from CSV file and create list of UE positions
-file_path = "Toy_Model/grid_points_toy_1x1.csv" 
->>>>>>> 4c459b992a444e44f2525699a9abc2e53fa18df6
+file_path = "Undergraduate_Thesis_Project/Toy_Model/grid_points_toy_1x1.csv" 
 grid_position = pd.read_csv(file_path)
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
