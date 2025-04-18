@@ -31,7 +31,7 @@ import copy
 
 
 # Load integrated scene from the xml file
-scene = load_scene("Toy_Model/toy_XML/Chalmers_entrance.xml")
+scene = load_scene("Undergraduate_Thesis_Project/Toy_Model/toy_XML/Chalmers_entrance.xml")
 # Set the carrier frequency 
 fc = 3.5e9 # from band n78 in 3GPP TS 38.104. Can be changed later when testing out mmWave or sub-THz
 scene.frequency = fc
@@ -72,7 +72,7 @@ path_data_array = {}
 h_freqency_data = {}
 h_avg_power_data = {}
 # TODO generate 1 by 1 grid for the entire campus 
-file_path = "Toy_Model/grid_points_toy_1x1.csv" 
+file_path = "Undergraduate_Thesis_Project/Toy_Model/grid_points_toy_1x1.csv" 
 grid_position = pd.read_csv(file_path)
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
