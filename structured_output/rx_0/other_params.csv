@@ -1,0 +1,17 @@
+parameter,shape,value (preview)
+_doppler,TensorXf,"[[[],
+  []]]"
+_num_rx,int,1
+_num_tx,int,2
+_phi_r,TensorXf,"[[[],
+  []]]"
+_phi_t,TensorXf,"[[[],
+  []]]"
+_rx_array,PlanarArray,<sionna.rt.antenna_array.PlanarArray object at 0x0000016B1B71F790>
+_tau,TensorXf,"[[[],
+  []]]"
+_theta_t,TensorXf,"[[[],
+  []]]"
+_theta_r,TensorXf,"[[[],
+  []]]"
+_tx_array,PlanarArray,<sionna.rt.antenna_array.PlanarArray object at 0x0000016B1B708750>

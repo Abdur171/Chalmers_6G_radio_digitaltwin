@@ -45,7 +45,9 @@ scene.rx_array = PlanarArray(num_rows=1,
                              polarization="V")
 
 # Transmitters
-tx1 = Transmitter("tx1", [0.5, -3, 18], [0.0, 0.0, 0.0])
+tx0 = Transmitter("tx-0", [0.5, -3, 18], [0.0, 0.0, 0.0])
+tx1 = Transmitter("tx-1", [1, 3, 15], [0.0, 0.0, 0.0])
+scene.add(tx0)
 scene.add(tx1)
 
 # Receiver grid
@@ -71,7 +73,7 @@ for i in range(len(ue_positions[0:6])):
     scene.add(rx)
 
     paths = p_solver(scene=scene, max_depth=4, los=True,
-                     specular_reflection=True, diffuse_reflection=False, refraction=True)
+                     specular_reflection=True, diffuse_reflection=False, refraction=False)
 
     path_dict = paths.__dict__
 
@@ -85,7 +87,7 @@ for i in range(len(ue_positions[0:6])):
     h_avg_power = tf.reduce_mean(tf.abs(h_freq)**2).numpy()
     h_freqency_data[position_key] = h_freq
     h_avg_power_data[position_key] = h_avg_power
-
+    
     scene.remove(f"rx-{i}")
 
     pos_data = {"position": position_key,
@@ -98,7 +100,7 @@ for i in range(len(ue_positions[0:6])):
             a_complex = real + 1j*imag
             pos_data['_a_complex'] = a_complex
         else:
-            pos_data[param] = np.squeeze(path_dict[param])
+            pos_data[param] = path_dict[param]
 
     data_combined.append(pos_data)
 
@@ -146,7 +148,7 @@ for i, pos_data in enumerate(data_combined):
 
 
 # Save global transmitter mapping
-tx_info_path = os.path.join(output_root, "tx_mapping.csv")
+tx_info_path = os.path.join(output_root, "tx_rx_mapping.csv")
 with open(tx_info_path, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Transmitter", "X", "Y", "Z"])
@@ -154,3 +156,8 @@ with open(tx_info_path, "w", newline="") as f:
         tx_obj = scene.get(tx_name)  # Get the actual transmitter object
         coords = tx_obj.position.numpy()
         writer.writerow([tx_name] + list(coords))
+    
+    for i, pos_data in enumerate(data_combined):
+        rx_name = f"rx-{i}"
+        coords = pos_data["position"]
+        writer.writerow([rx_name] + list(coords))
