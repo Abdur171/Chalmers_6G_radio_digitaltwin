@@ -22,7 +22,7 @@ from sionna.phy.mimo import StreamManagement
 tf.random.set_seed(42)
 
 # Load integrated scene from the xml file
-scene = load_scene("Toy_Model/toy_XML/Chalmers_entrance.xml")
+scene = load_scene("Undergraduate_Thesis_Project/Toy_Model/toy_XML/Chalmers_entrance.xml")
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -62,7 +62,7 @@ data_combined = []
 desired_parameters = [
     "_a_real","_a_imag", "_doppler", "_num_rx", "_num_tx",
     "_phi_r", "_phi_t", "_rx_array", "_tau",
-    "_theta_t", "_theta_r", "_tx_array"
+    "_theta_t", "_theta_r", "_tx_array","_vertices"
 ]
 
 h_freqency_data = {}
@@ -76,6 +76,10 @@ for i in range(len(ue_positions[0:1])):
 
     paths = p_solver(scene=scene, max_depth=1, los=True,
                      specular_reflection=True, diffuse_reflection=False, refraction=False)
+    
+    import contextlib, os
+    with contextlib.redirect_stdout(open(os.devnull, 'w')): # Removes the output in terminal of the scene.preview
+        preview_scene = scene.preview(paths=paths)    # Needed to get all parameters (for some dumb reason)
 
     path_dict = paths.__dict__
 
@@ -104,7 +108,7 @@ for i in range(len(ue_positions[0:1])):
         else:
             pos_data[param] = path_dict[param]
 
-    pos_data["_vertices"] = paths.vertices
+    #pos_data["_vertices"] = paths.vertices
     data_combined.append(pos_data)
 
 # Save combined summary CSV
@@ -141,16 +145,16 @@ for i, pos_data in enumerate(data_combined):
     # Save other parameters
     with open(os.path.join(rx_dir, "other_params.csv"), "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["parameter", "shape", "value (preview)"])
+        writer.writerow(["parameter", "value (preview)"])
         for param in desired_parameters:
             if param in ["_a_real", "_a_imag", "_a_complex", "h_frequency_data"]:
                 continue
             value = pos_data.get(param)
             if isinstance(value, np.ndarray):
                 preview = value.flatten()[:2]
-                writer.writerow([param, value.shape, preview])
+                writer.writerow([param, preview])
             else:
-                writer.writerow([param, type(value).__name__, str(value)])
+                writer.writerow([param, str(value)])
 
 
 # Save global transmitter mapping
@@ -167,3 +171,6 @@ with open(tx_info_path, "w", newline="") as f:
         rx_name = f"rx-{i}"
         coords = pos_data["position"]
         writer.writerow([rx_name] + list(coords))
+
+path_dict = paths.__dict__
+print(path_dict)
