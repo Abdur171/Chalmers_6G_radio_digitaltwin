@@ -46,14 +46,16 @@ scene.rx_array = PlanarArray(num_rows=1,
 
 # Transmitters
 tx0 = Transmitter("tx-0", [0.5, -3, 18], [0.0, 0.0, 0.0])
-tx1 = Transmitter("tx-1", [1, 3, 15], [0.0, 0.0, 0.0])
+tx1 = Transmitter("tx-1", [0.5, -3, 30], [0.0, 0.0, 0.0])
 scene.add(tx0)
 scene.add(tx1)
+tx2 = Transmitter("tx-2", [0.5, -3, 17], [0.0, 0.0, 0.0])  #Toymodel coordinates
+scene.add(tx2)
 
 # Receiver grid
-grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
-ue_grid = grid_position[['X','Y','Z']].values.tolist()
-ue_positions = tf.squeeze(ue_grid)
+#grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
+#ue_grid = grid_position[['X','Y','Z']].values.tolist()
+ue_positions = [[-30, 59.820812, 1],[1,1,1]]             #tf.squeeze(ue_grid)
 
 # Data collection
 data_combined = []
@@ -68,11 +70,11 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:6])):
+for i in range(len(ue_positions[0:1])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
-    paths = p_solver(scene=scene, max_depth=4, los=True,
+    paths = p_solver(scene=scene, max_depth=1, los=True,
                      specular_reflection=True, diffuse_reflection=False, refraction=False)
 
     path_dict = paths.__dict__
@@ -102,6 +104,7 @@ for i in range(len(ue_positions[0:6])):
         else:
             pos_data[param] = path_dict[param]
 
+    pos_data["_vertices"] = paths.vertices
     data_combined.append(pos_data)
 
 # Save combined summary CSV
@@ -119,11 +122,14 @@ for i, pos_data in enumerate(data_combined):
     # Save 'a' coefficients
     a = pos_data.get("_a_complex")
     if a is not None:
-        a = np.array(a).flatten()  # Flatten to 1D (if it's not already)
         with open(os.path.join(rx_dir, "a_coeffs.csv"), "w", newline="") as f:
             writer = csv.writer(f)
-            for c in a:
-                writer.writerow([str(c)])
+            writer.writerow(['path'] + [f"tx-{tx_num}" for tx_num in range(len(scene.transmitters))])
+            
+            for path in range(a.shape[2]):
+                writer.writerow([path+1] + [(a[tx_num,:,path]) for tx_num in range(len(scene.transmitters))]) 
+            
+
 
     # Save h_frequency data (CFR)
     h_freq = pos_data.get("h_frequency_data")
@@ -154,7 +160,7 @@ with open(tx_info_path, "w", newline="") as f:
     writer.writerow(["Transmitter", "X", "Y", "Z"])
     for tx_name in scene.transmitters:
         tx_obj = scene.get(tx_name)  # Get the actual transmitter object
-        coords = tx_obj.position.numpy()
+        coords = np.squeeze(tx_obj.position)
         writer.writerow([tx_name] + list(coords))
     
     for i, pos_data in enumerate(data_combined):
