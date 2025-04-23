@@ -22,7 +22,7 @@ from sionna.phy.mimo import StreamManagement
 tf.random.set_seed(42)
 
 # Load integrated scene from the xml file
-scene = load_scene("Toy_Model/toy_XML/Chalmers_entrance.xml")
+scene = load_scene("Undergraduate_Thesis_Project/Toy_Model/toy_XML/Chalmers_entrance.xml")
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -30,15 +30,19 @@ Lambda = c / fc
 antenna_dist = float(Lambda / 2)
 
 # Configure arrays
-scene.tx_array = PlanarArray(num_rows=1, 
-                             num_cols=1, 
+num_rows_tx=2
+num_cols_tx=2
+num_rows_rx=1
+num_cols_rx=1
+scene.tx_array = PlanarArray(num_rows=num_rows_tx, 
+                             num_cols=num_cols_tx, 
                              vertical_spacing=antenna_dist, 
                              horizontal_spacing=antenna_dist, 
                              pattern="iso", 
                              polarization="V")
 
-scene.rx_array = PlanarArray(num_rows=1, 
-                             num_cols=1, 
+scene.rx_array = PlanarArray(num_rows=num_rows_rx, 
+                             num_cols=num_cols_rx, 
                              vertical_spacing=antenna_dist, 
                              horizontal_spacing=antenna_dist, 
                              pattern="iso", 
@@ -47,13 +51,17 @@ scene.rx_array = PlanarArray(num_rows=1,
 # Transmitters
 tx0 = Transmitter("tx-0", [0.5, -3, 18], [0.0, 0.0, 0.0])
 scene.add(tx0)
-tx1 = Transmitter("tx-1", [0.5, -3, 30], [0.0, 0.0, 0.0])
+tx1 = Transmitter("tx-1", [5, -7, 18], [0.0, 0.0, 0.0])
 scene.add(tx1)
-tx2 = Transmitter("tx-2", [0.5, -3, 17], [0.0, 0.0, 0.0])  #Toymodel coordinates
+tx2 = Transmitter("tx-2", [2.5, -15, 17], [0.0, 0.0, 0.0])  #Toymodel coordinates
 scene.add(tx2)
+tx3 = Transmitter("tx-3", [10, 10, 20], [0.0, 0.0, 0.0])
+scene.add(tx3)
+tx4 = Transmitter("tx-4", [30, 15, 20], [0.0, 0.0, 0.0])
+scene.add(tx4) 
 
 # Receiver grid
-grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
+grid_position = pd.read_csv("Undergraduate_Thesis_Project/Toy_Model/grid_points_toy_1x1.csv")
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 #ue_positions = [[-30, 59.820812, 1],[1,1,1]]
@@ -71,16 +79,12 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:3])):
+for i in range(len(ue_positions[0:10])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
     paths = p_solver(scene=scene, max_depth=1, los=True,
                      specular_reflection=True, diffuse_reflection=False, refraction=False)
-    
-    #import contextlib, os
-    #with contextlib.redirect_stdout(open(os.devnull, 'w')): # Removes the output in terminal of the scene.preview #ignore
-        #preview_scene = scene.preview(paths=paths)    # Needed to get all parameters.
 
     path_dict = paths.__dict__
     path_dict['_vertices'] = paths.vertices
@@ -88,8 +92,8 @@ for i in range(len(ue_positions[0:3])):
     position_key = tuple(np.squeeze(rx.position.numpy()))
 
     subcarrier_spacing = 15e3
-    fft_size = 48
-    frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
+    num_frequencies = 2
+    frequencies = subcarrier_frequencies(num_frequencies, subcarrier_spacing)
     h_freq = paths.cfr(frequencies=frequencies, normalize=True,
                        normalize_delays=True, out_type="numpy")
     h_avg_power = tf.reduce_mean(tf.abs(h_freq)**2).numpy()
@@ -110,7 +114,6 @@ for i in range(len(ue_positions[0:3])):
         else:
             pos_data[param] = path_dict[param]
 
-    #pos_data["_vertices"] = paths.vertices #ignroe
     data_combined.append(pos_data)
 
 # Save combined summary CSV
@@ -142,6 +145,8 @@ for i, pos_data in enumerate(data_combined):
     # Save h_frequency data (CFR)
     h_freq = pos_data.get("h_frequency_data")
     if h_freq is not None:
+        #writer = csv.writer(f)
+        #writer.writerow([h_freq [len(scene.receivers) * (num_rows_rx*num_cols_rx) * len(scene.transmitters)* (num_rows_tx*num_cols_tx) , num] for num in range(num_frequencies)])
         h_freq = np.array(h_freq)
         np.savetxt(os.path.join(rx_dir, "h_frequency.csv"), h_freq.reshape(-1), delimiter=",")
     
