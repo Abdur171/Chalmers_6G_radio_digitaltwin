@@ -22,7 +22,7 @@ from sionna.phy.mimo import StreamManagement
 tf.random.set_seed(42)
 
 # Load integrated scene from the xml file
-scene = load_scene("Undergraduate_Thesis_Project/Toy_Model/toy_XML/Chalmers_entrance.xml")
+scene = load_scene("Toy_Model/toy_XML/Chalmers_entrance.xml")
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -30,8 +30,8 @@ Lambda = c / fc
 antenna_dist = float(Lambda / 2)
 
 # Configure arrays
-scene.tx_array = PlanarArray(num_rows=2, 
-                             num_cols=2, 
+scene.tx_array = PlanarArray(num_rows=1, 
+                             num_cols=1, 
                              vertical_spacing=antenna_dist, 
                              horizontal_spacing=antenna_dist, 
                              pattern="iso", 
@@ -53,7 +53,7 @@ tx2 = Transmitter("tx-2", [0.5, -3, 17], [0.0, 0.0, 0.0])  #Toymodel coordinates
 scene.add(tx2)
 
 # Receiver grid
-grid_position = pd.read_csv("Undergraduate_Thesis_Project/Toy_Model/grid_points_toy_1x1.csv")
+grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 #ue_positions = [[-30, 59.820812, 1],[1,1,1]]
@@ -131,10 +131,12 @@ for i, pos_data in enumerate(data_combined):
         with open(os.path.join(rx_dir, "a_coeffs.csv"), "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(['path'] + [f"tx-{tx_num}" for tx_num in range(len(scene.transmitters))])
-            
-            for path in range(a.shape[2]):
-                writer.writerow([path+1] + [(a[tx_num,:,path]) for tx_num in range(len(scene.transmitters))]) 
-            
+            if len(a.shape) == 3:
+                for path in range(a.shape[-1]):
+                    writer.writerow([path+1] + [(a[tx_num,:,path]) for tx_num in range(len(scene.transmitters))]) 
+            else:
+                writer.writerow([1] + [(a[tx_num]) for tx_num in range(len(scene.transmitters))])
+
 
 
     # Save h_frequency data (CFR)
