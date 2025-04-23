@@ -46,16 +46,17 @@ scene.rx_array = PlanarArray(num_rows=1,
 
 # Transmitters
 tx0 = Transmitter("tx-0", [0.5, -3, 18], [0.0, 0.0, 0.0])
-tx1 = Transmitter("tx-1", [0.5, -3, 30], [0.0, 0.0, 0.0])
 scene.add(tx0)
+tx1 = Transmitter("tx-1", [0.5, -3, 30], [0.0, 0.0, 0.0])
 scene.add(tx1)
 tx2 = Transmitter("tx-2", [0.5, -3, 17], [0.0, 0.0, 0.0])  #Toymodel coordinates
 scene.add(tx2)
 
 # Receiver grid
-#grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
-#ue_grid = grid_position[['X','Y','Z']].values.tolist()
-ue_positions = [[-30, 59.820812, 1],[1,1,1]]             #tf.squeeze(ue_grid)
+grid_position = pd.read_csv("Undergraduate_Thesis_Project/Toy_Model/grid_points_toy_1x1.csv")
+ue_grid = grid_position[['X','Y','Z']].values.tolist()
+ue_positions = tf.squeeze(ue_grid)
+#ue_positions = [[-30, 59.820812, 1],[1,1,1]]
 
 # Data collection
 data_combined = []
@@ -70,18 +71,19 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:1])):
+for i in range(len(ue_positions[0:3])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
     paths = p_solver(scene=scene, max_depth=1, los=True,
                      specular_reflection=True, diffuse_reflection=False, refraction=False)
     
-    import contextlib, os
-    with contextlib.redirect_stdout(open(os.devnull, 'w')): # Removes the output in terminal of the scene.preview
-        preview_scene = scene.preview(paths=paths)    # Needed to get all parameters (for some dumb reason)
+    #import contextlib, os
+    #with contextlib.redirect_stdout(open(os.devnull, 'w')): # Removes the output in terminal of the scene.preview #ignore
+        #preview_scene = scene.preview(paths=paths)    # Needed to get all parameters.
 
     path_dict = paths.__dict__
+    path_dict['_vertices'] = paths.vertices
 
     position_key = tuple(np.squeeze(rx.position.numpy()))
 
@@ -108,7 +110,7 @@ for i in range(len(ue_positions[0:1])):
         else:
             pos_data[param] = path_dict[param]
 
-    #pos_data["_vertices"] = paths.vertices
+    #pos_data["_vertices"] = paths.vertices #ignroe
     data_combined.append(pos_data)
 
 # Save combined summary CSV
