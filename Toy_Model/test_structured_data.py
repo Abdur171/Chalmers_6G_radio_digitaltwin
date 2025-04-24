@@ -30,8 +30,8 @@ Lambda = c / fc
 antenna_dist = float(Lambda / 2)
 
 # Configure arrays
-scene.tx_array = PlanarArray(num_rows=1, 
-                             num_cols=1, 
+scene.tx_array = PlanarArray(num_rows=2, 
+                             num_cols=2, 
                              vertical_spacing=antenna_dist, 
                              horizontal_spacing=antenna_dist, 
                              pattern="iso", 
@@ -56,14 +56,13 @@ scene.add(tx2)
 grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
-#ue_positions = [[-30, 59.820812, 1],[1,1,1]]
 
 # Data collection
 data_combined = []
 desired_parameters = [
-    "_a_real","_a_imag", "_doppler", "_num_rx", "_num_tx",
-    "_phi_r", "_phi_t", "_rx_array", "_tau",
-    "_theta_t", "_theta_r", "_tx_array","_vertices"
+    "_num_rx", "_num_tx", "_a_complex", "_tau", "_doppler",
+    "_phi_r", "_phi_t",
+    "_theta_t", "_theta_r", "_vertices"
 ]
 
 h_freqency_data = {}
@@ -75,7 +74,7 @@ for i in range(len(ue_positions[0:3])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
-    paths = p_solver(scene=scene, max_depth=1, los=True,
+    paths = p_solver(scene=scene, max_depth=4, los=True,
                      specular_reflection=True, diffuse_reflection=False, refraction=False)
     
     #import contextlib, os
@@ -87,31 +86,29 @@ for i in range(len(ue_positions[0:3])):
 
     position_key = tuple(np.squeeze(rx.position.numpy()))
 
+    a, tau = paths.cir(normalize_delays=False)
+    a = np.squeeze(a)
+    a_complex = a[0]+1j*a[1]
+    path_dict['_a_complex'] = np.squeeze(a_complex)
+
     subcarrier_spacing = 15e3
     fft_size = 48
     frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
-    h_freq = paths.cfr(frequencies=frequencies, normalize=True,
-                       normalize_delays=True, out_type="numpy")
+    h_freq = paths.cfr(frequencies=frequencies, normalize=False,
+                       normalize_delays=False, out_type="numpy")
     h_avg_power = tf.reduce_mean(tf.abs(h_freq)**2).numpy()
     h_freqency_data[position_key] = h_freq
     h_avg_power_data[position_key] = h_avg_power
     
     scene.remove(f"rx-{i}")
 
-    pos_data = {"position": position_key,
+    all_data = {"Position": position_key,
                 "h_avg_power": h_avg_power,
                 "h_frequency_data": h_freq}
     for param in desired_parameters:
-        if param in ['_a_real', '_a_imag']:
-            real = np.squeeze(path_dict['_a_real'])
-            imag = np.squeeze(path_dict['_a_imag'])
-            a_complex = real + 1j*imag
-            pos_data['_a_complex'] = a_complex
-        else:
-            pos_data[param] = path_dict[param]
+        all_data[param] = path_dict[param]
 
-    #pos_data["_vertices"] = paths.vertices #ignroe
-    data_combined.append(pos_data)
+    data_combined.append(all_data)
 
 # Save combined summary CSV
 df = pd.DataFrame(data_combined)
@@ -121,16 +118,16 @@ df.to_csv("all_data.csv", index=True)
 output_root = "structured_output"
 os.makedirs(output_root, exist_ok=True)
 
-for i, pos_data in enumerate(data_combined):
+for i, data in enumerate(data_combined):
     rx_dir = os.path.join(output_root, f"rx_{i}")
     os.makedirs(rx_dir, exist_ok=True)
 
     # Save 'a' coefficients
-    a = pos_data.get("_a_complex")
+    a = data.get("_a_complex")
     if a is not None:
         with open(os.path.join(rx_dir, "a_coeffs.csv"), "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(['path'] + [f"tx-{tx_num}" for tx_num in range(len(scene.transmitters))])
+            writer.writerow(['Path'] + [f"tx-{tx_num}" for tx_num in range(len(scene.transmitters))])
             if len(a.shape) == 3:
                 for path in range(a.shape[-1]):
                     writer.writerow([path+1] + [(a[tx_num,:,path]) for tx_num in range(len(scene.transmitters))]) 
@@ -138,27 +135,29 @@ for i, pos_data in enumerate(data_combined):
                 writer.writerow([1] + [(a[tx_num]) for tx_num in range(len(scene.transmitters))])
 
 
-
     # Save h_frequency data (CFR)
-    h_freq = pos_data.get("h_frequency_data")
+    h_freq = data.get("h_frequency_data")
     if h_freq is not None:
-        h_freq = np.array(h_freq)
-        np.savetxt(os.path.join(rx_dir, "h_frequency.csv"), h_freq.reshape(-1), delimiter=",")
+        h_freq = np.squeeze(h_freq)
+        with open(os.path.join(rx_dir, "h_frequency.csv"), "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(['Transmitter'] + [f"Subcarrier-{sub_num+1}" for sub_num in range(fft_size)])
+            if len(h_freq.shape) == 3:
+                for tx_num in range(len(scene.transmitters)):
+                    writer.writerow([f"tx-{tx_num+1}"] + [h_freq[tx_num,:,sub_num] for sub_num in range(fft_size)])
+            else:
+                for tx_num in range(len(scene.transmitters)):
+                    writer.writerow([f"tx-{tx_num+1}"] + [h_freq[tx_num,:,sub_num] for sub_num in range(fft_size)])
     
 
-    # Save other parameters
+    # Save other parameters FIXA DETTA
     with open(os.path.join(rx_dir, "other_params.csv"), "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["parameter", "value (preview)"])
-        for param in desired_parameters:
-            if param in ["_a_real", "_a_imag", "_a_complex", "h_frequency_data"]:
-                continue
-            value = pos_data.get(param)
-            if isinstance(value, np.ndarray):
-                preview = value.flatten()[:2]
-                writer.writerow([param, preview])
-            else:
-                writer.writerow([param, str(value)])
+        writer.writerow([param for param in desired_parameters if param not in ["_a_complex"]])
+        writer.writerow([data.get(param) for param in desired_parameters if param not in ["_a_complex"]])
+
+ 
+
 
 
 # Save global transmitter mapping
@@ -173,8 +172,6 @@ with open(tx_info_path, "w", newline="") as f:
     
     for i, pos_data in enumerate(data_combined):
         rx_name = f"rx-{i}"
-        coords = pos_data["position"]
+        coords = pos_data["Position"]
         writer.writerow([rx_name] + list(coords))
 
-path_dict = paths.__dict__
-print(path_dict)
