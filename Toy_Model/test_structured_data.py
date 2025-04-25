@@ -30,15 +30,21 @@ Lambda = c / fc
 antenna_dist = float(Lambda / 2)
 
 # Configure arrays
-scene.tx_array = PlanarArray(num_rows=2, 
-                             num_cols=2, 
+num_rows_tx = 2
+num_cols_tx = 2
+
+num_rows_rx = 1
+num_cols_rx = 1
+
+scene.tx_array = PlanarArray(num_rows=num_rows_tx, 
+                             num_cols=num_cols_tx, 
                              vertical_spacing=antenna_dist, 
                              horizontal_spacing=antenna_dist, 
                              pattern="iso", 
                              polarization="V")
 
-scene.rx_array = PlanarArray(num_rows=1, 
-                             num_cols=1, 
+scene.rx_array = PlanarArray(num_rows=num_rows_rx, 
+                             num_cols=num_cols_rx, 
                              vertical_spacing=antenna_dist, 
                              horizontal_spacing=antenna_dist, 
                              pattern="iso", 
@@ -60,7 +66,7 @@ ue_positions = tf.squeeze(ue_grid)
 # Data collection
 data_combined = []
 desired_parameters = [
-    "_num_rx", "_num_tx", "_a_complex", "_tau", "_doppler",
+    "_a_complex", "_tau", "_doppler",
     "_phi_r", "_phi_t",
     "_theta_t", "_theta_r", "_vertices"
 ]
@@ -70,25 +76,19 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:3])):
+for i in range(len(ue_positions[0:10])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
     paths = p_solver(scene=scene, max_depth=4, los=True,
                      specular_reflection=True, diffuse_reflection=False, refraction=False)
-    
-    #import contextlib, os
-    #with contextlib.redirect_stdout(open(os.devnull, 'w')): # Removes the output in terminal of the scene.preview #ignore
-        #preview_scene = scene.preview(paths=paths)    # Needed to get all parameters.
 
     path_dict = paths.__dict__
     path_dict['_vertices'] = paths.vertices
 
     position_key = tuple(np.squeeze(rx.position.numpy()))
 
-    a, tau = paths.cir(normalize_delays=False)
-    a = np.squeeze(a)
-    a_complex = a[0]+1j*a[1]
+    a_complex, tau = paths.cir(normalize_delays=False)
     path_dict['_a_complex'] = np.squeeze(a_complex)
 
     subcarrier_spacing = 15e3
@@ -106,7 +106,7 @@ for i in range(len(ue_positions[0:3])):
                 "h_avg_power": h_avg_power,
                 "h_frequency_data": h_freq}
     for param in desired_parameters:
-        all_data[param] = path_dict[param]
+        all_data[param] = np.squeeze(path_dict[param])
 
     data_combined.append(all_data)
 
@@ -114,49 +114,122 @@ for i in range(len(ue_positions[0:3])):
 df = pd.DataFrame(data_combined)
 df.to_csv("all_data.csv", index=True)
 
+
+
+"""
+Organizing the generated data for easier visualization and export to Matlab
+
+"""
+
+
 # Create detailed per-receiver output
 output_root = "structured_output"
 os.makedirs(output_root, exist_ok=True)
 
-for i, data in enumerate(data_combined):
-    rx_dir = os.path.join(output_root, f"rx_{i}")
-    os.makedirs(rx_dir, exist_ok=True)
+for tx in range(len(scene.transmitters)):
+    tx_dir = os.path.join(output_root, f"tx_{tx+1}")
 
-    # Save 'a' coefficients
-    a = data.get("_a_complex")
-    if a is not None:
-        with open(os.path.join(rx_dir, "a_coeffs.csv"), "w", newline="") as f:
+    for i, data in enumerate(data_combined):
+        rx_dir = os.path.join(tx_dir, f"rx_{i+1}")
+        os.makedirs(rx_dir, exist_ok=True)
+
+        
+        
+        # Save 'a' coefficients
+        a = data.get("_a_complex")
+        if a is not None:
+            with open(os.path.join(rx_dir, "a_coeffs.csv"), "w", newline="") as f:
+                writer = csv.writer(f)
+                if len(a.shape) == 4:
+                    for path in range(a.shape[-1]):
+                        row = []
+                        for Ntxrx in range(num_cols_rx*num_cols_tx*num_rows_rx*num_rows_tx):
+                            row.append(a[0,tx,Ntxrx,path]) # real part
+                            row.append(a[1,tx,Ntxrx,path]) # imaginary part
+                        writer.writerow(row) 
+                else:
+                    row = []
+                    for Ntxrx in range(num_cols_rx*num_cols_tx*num_rows_rx*num_rows_tx):
+                        row.append(a[0,tx,Ntxrx]) # real part
+                        row.append(a[1,tx,Ntxrx]) # imaginary part
+                    writer.writerow(row)
+
+
+        
+        # Save h_frequency data (CFR)
+        h_freq = data.get("h_frequency_data")
+        if h_freq is not None:
+            h_freq = np.squeeze(h_freq)
+            with open(os.path.join(rx_dir, "h_frequency.csv"), "w", newline="") as f:
+                writer = csv.writer(f)
+
+                num_antennas = num_cols_rx * num_cols_tx * num_rows_rx * num_rows_tx
+
+                if h_freq.ndim == 3:
+                    for sub_num in range(fft_size):
+                        row = []
+                        for Ntxrx in range(num_antennas):
+                            row.append(np.real(h_freq[tx, Ntxrx, sub_num]))  # Real part
+                            row.append(np.imag(h_freq[tx, Ntxrx, sub_num]))  # Imaginary part
+                        writer.writerow(row)
+
+                else:
+                    for sub_num in range(fft_size):
+                        row = []
+                        for Ntxrx in range(num_antennas):
+                            row.append(np.real(h_freq[Ntxrx, sub_num]))  # Real part
+                            row.append(np.imag(h_freq[Ntxrx, sub_num]))  # Imaginary part
+                        writer.writerow(row)
+
+
+
+        # Save other parameters. See desired_parameters to know the order of the parameters
+        with open(os.path.join(rx_dir, "other_params.csv"), "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(['Path'] + [f"tx-{tx_num}" for tx_num in range(len(scene.transmitters))])
-            if len(a.shape) == 3:
-                for path in range(a.shape[-1]):
-                    writer.writerow([path+1] + [(a[tx_num,:,path]) for tx_num in range(len(scene.transmitters))]) 
+            filtered_params = [param for param in desired_parameters if param not in ["_a_complex", "_vertices"]]
+            val = data.get('_tau')
+            if len(val.shape) > 1:
+
+                for path in range(val.shape[-1]):
+                    row = []
+                    for param in filtered_params:
+                        value = data.get(param)
+                        if len(value.shape) > 1:
+                            row.append(value[tx, path])
+                        else:
+                            row.append(value[tx])
+                    writer.writerow(row)
             else:
-                writer.writerow([1] + [(a[tx_num]) for tx_num in range(len(scene.transmitters))])
+                row = []
+                for param in filtered_params:
+                    value = data.get(param)
+                    if len(value.shape) > 1:
+                        row.append(value[tx, path])
+                    else:
+                        row.append(value[tx])
+                writer.writerow(row)
 
-
-    # Save h_frequency data (CFR)
-    h_freq = data.get("h_frequency_data")
-    if h_freq is not None:
-        h_freq = np.squeeze(h_freq)
-        with open(os.path.join(rx_dir, "h_frequency.csv"), "w", newline="") as f:
+        
+        
+        # Save vertices.
+        with open(os.path.join(rx_dir, "vertices.csv"), "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(['Transmitter'] + [f"Subcarrier-{sub_num+1}" for sub_num in range(fft_size)])
-            if len(h_freq.shape) == 3:
-                for tx_num in range(len(scene.transmitters)):
-                    writer.writerow([f"tx-{tx_num+1}"] + [h_freq[tx_num,:,sub_num] for sub_num in range(fft_size)])
-            else:
-                for tx_num in range(len(scene.transmitters)):
-                    writer.writerow([f"tx-{tx_num+1}"] + [h_freq[tx_num,:,sub_num] for sub_num in range(fft_size)])
-    
+            vertices = data.get('_vertices')
 
-    # Save other parameters FIXA DETTA
-    with open(os.path.join(rx_dir, "other_params.csv"), "w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow([param for param in desired_parameters if param not in ["_a_complex"]])
-        writer.writerow([data.get(param) for param in desired_parameters if param not in ["_a_complex"]])
+            if vertices is not None:
+                if vertices.ndim == 4:
+                    for max_depth in range(vertices.shape[0]):
+                        this_vertices = vertices[max_depth, tx]  # shape: (num_paths, 3)
+                        for path in range(this_vertices.shape[0]):
+                            row = [f"max_depth {max_depth+1}"]
+                            row.extend(this_vertices[path, coord] for coord in range(3))
+                            writer.writerow(row)
 
- 
+                elif vertices.ndim == 3:
+                    for max_depth in range(vertices.shape[0]):
+                        row = [f"max_depth {max_depth+1}"]
+                        row.extend(vertices[max_depth, tx, coord] for coord in range(3))
+                        writer.writerow(row)
 
 
 
@@ -175,3 +248,4 @@ with open(tx_info_path, "w", newline="") as f:
         coords = pos_data["Position"]
         writer.writerow([rx_name] + list(coords))
 
+"""FIXA vertices"""
