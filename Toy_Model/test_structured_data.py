@@ -22,7 +22,7 @@ from sionna.phy.mimo import StreamManagement
 tf.random.set_seed(42)
 
 # Load integrated scene from the xml file
-scene = load_scene("Toy_Model/toy_XML/Chalmers_entrance.xml")
+scene = load_scene("Undergraduate_Thesis_project/Toy_Model/toy_XML/Chalmers_entrance.xml")
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -51,17 +51,19 @@ scene.rx_array = PlanarArray(num_rows=num_rows_rx,
                              polarization="V")
 
 # Transmitters
-tx0 = Transmitter("tx-0", [0.5, -3, 18], [0.0, 0.0, 0.0])
+tx0 = Transmitter("tx-0", [0.5, 17, 14], [0, 0, 0])
 scene.add(tx0)
-tx1 = Transmitter("tx-1", [0.5, -3, 30], [0.0, 0.0, 0.0])
+tx1 = Transmitter("tx-1", [-32, -31, 1], [0, 0, 0])
 scene.add(tx1)
-tx2 = Transmitter("tx-2", [0.5, -3, 17], [0.0, 0.0, 0.0])  #Toymodel coordinates
+tx2 = Transmitter("tx-2", [-5, 20, 25], [0, 0, 0])  #Toymodel coordinates
 scene.add(tx2)
 
 # Receiver grid
-grid_position = pd.read_csv("Toy_Model/grid_points_toy_1x1.csv")
-ue_grid = grid_position[['X','Y','Z']].values.tolist()
-ue_positions = tf.squeeze(ue_grid)
+#grid_position = pd.read_csv("Undergraduate_Thesis_project/Toy_Model/grid_points_toy_1x1.csv")
+#ue_grid = grid_position[['X','Y','Z']].values.tolist()
+#ue_positions = tf.squeeze(ue_grid)
+
+ue_positions = [[11,-1.5,1.4],[0,0,0]]
 
 # Data collection
 data_combined = []
@@ -76,12 +78,12 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:10])):
+for i in range(len(ue_positions[0:1])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
-    paths = p_solver(scene=scene, max_depth=4, los=True,
-                     specular_reflection=True, diffuse_reflection=False, refraction=False)
+    paths = p_solver(scene=scene, max_depth=2, los=True,
+                     specular_reflection=True, diffuse_reflection=True, refraction=False)
 
     path_dict = paths.__dict__
     path_dict['_vertices'] = paths.vertices
@@ -248,4 +250,4 @@ with open(tx_info_path, "w", newline="") as f:
         coords = pos_data["Position"]
         writer.writerow([rx_name] + list(coords))
 
-"""FIXA vertices"""
+#print(path_dict)
