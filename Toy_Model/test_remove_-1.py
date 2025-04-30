@@ -231,12 +231,12 @@ for tx in range(len(scene.transmitters)):
                     for max_depth in range(vertices.shape[0]):
                         this_vertices = vertices[max_depth, tx]
                         for path in range(max_valid_path):
-                            row = [f"max_depth {max_depth+1}"]
+                            row = [f"{max_depth+1}"]
                             row.extend(this_vertices[path, coord] for coord in range(3))
                             writer.writerow(row)
                 elif vertices.ndim == 3:
                     for max_depth in range(vertices.shape[0]):
-                        row = [f"max_depth {max_depth+1}"]
+                        row = [f"{max_depth+1}"]
                         row.extend(vertices[max_depth, tx, coord] for coord in range(3))
                         writer.writerow(row)
 
