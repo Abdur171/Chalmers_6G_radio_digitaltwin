@@ -22,7 +22,7 @@ from sionna.phy.mimo import StreamManagement
 tf.random.set_seed(42)
 
 # Load integrated scene from the xml file
-scene = load_scene("Data_Generation/Entrance_XML/chalmers_map_v53_Entrence_for_datageneration.xml")
+scene = load_scene("Undergraduate_Thesis_Project/Data_Generation/Entrance_XML/chalmers_map_v53_Entrence_for_datageneration.xml")
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -70,7 +70,7 @@ tx6 = Transmitter("tx6", [-84.3, -221, 25.8], [0.0, 0.0, 0.0])
 scene.add(tx6)
 
 # Receiver grid
-grid_position = pd.read_csv("Data_Generation/Grid_points_1x1_Entrance.csv")
+grid_position = pd.read_csv("Undergraduate_Thesis_Project/Data_Generation/Grid_points_1x1_Entrance.csv")
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 
@@ -88,7 +88,7 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:3])):
+for i in range(len(ue_positions)):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
@@ -124,7 +124,7 @@ for i in range(len(ue_positions[0:3])):
 
 # Save combined summary CSV
 df = pd.DataFrame(data_combined)
-df.to_csv("all_data_test1.csv", index=True)
+df.to_csv("all_data.csv", index=True)
 
 
 
@@ -135,7 +135,7 @@ Organizing the generated data for easier visualization and export to Matlab
 
 
 # --- Create root output directory ---
-output_root = "structured_output_test_2"
+output_root = "structured_data"
 os.makedirs(output_root, exist_ok=True)
 
 # --- Start looping over transmitters ---
