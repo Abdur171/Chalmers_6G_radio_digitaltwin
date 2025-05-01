@@ -22,7 +22,7 @@ from sionna.phy.mimo import StreamManagement
 tf.random.set_seed(42)
 
 # Load integrated scene from the xml file
-scene = load_scene("Undergraduate_Thesis_project/Toy_Model/toy_XML/Chalmers_entrance.xml")
+scene = load_scene("Data_Generation/Entrance_XML/chalmers_map_v53_Entrence_for_datageneration.xml")
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -51,19 +51,29 @@ scene.rx_array = PlanarArray(num_rows=num_rows_rx,
                              polarization="V")
 
 # Transmitters
-tx0 = Transmitter("tx-0", [0.5, 17, 14], [0, 0, 0])
-scene.add(tx0)
-tx1 = Transmitter("tx-1", [-32, -31, 1], [0, 0, 0])
+tx1 = Transmitter("tx1", [-207, -31.8, 16.3], [0.0, 0.0, 0.0])
 scene.add(tx1)
-tx2 = Transmitter("tx-2", [-5, 20, 25], [0, 0, 0])  #Toymodel coordinates
+
+tx2 = Transmitter("tx2", [-172.5, 211.6, 36.3], [0.0, 0.0, 0.0])
 scene.add(tx2)
 
-# Receiver grid
-#grid_position = pd.read_csv("Undergraduate_Thesis_project/Toy_Model/grid_points_toy_1x1.csv")
-#ue_grid = grid_position[['X','Y','Z']].values.tolist()
-#ue_positions = tf.squeeze(ue_grid)
+tx3 = Transmitter("tx3", [-114, 54, 39], [0.0, 0.0, 0.0])
+scene.add(tx3)
 
-ue_positions = [[11,-1.5,1.4],[0,0,0]]
+tx4 = Transmitter("tx4", [82.2, -203.7, 39], [0.0, 0.0, 0.0])
+scene.add(tx4)
+
+tx5 = Transmitter("tx5", [-7, 175.4, 32.8], [0.0, 0.0, 0.0])
+scene.add(tx5)
+
+tx6 = Transmitter("tx6", [-84.3, -221, 25.8], [0.0, 0.0, 0.0])
+scene.add(tx6)
+
+# Receiver grid
+grid_position = pd.read_csv("Data_Generation/Grid_points_1x1_Entrance.csv")
+ue_grid = grid_position[['X','Y','Z']].values.tolist()
+ue_positions = tf.squeeze(ue_grid)
+
 
 # Data collection
 data_combined = []
@@ -78,7 +88,7 @@ h_avg_power_data = {}
 
 p_solver = PathSolver()
 
-for i in range(len(ue_positions[0:1])):
+for i in range(len(ue_positions[0:3])):
     rx = Receiver(name=f"rx-{i}", position=ue_positions[i])
     scene.add(rx)
 
@@ -94,7 +104,7 @@ for i in range(len(ue_positions[0:1])):
     path_dict['_a_complex'] = np.squeeze(a_complex)
 
     subcarrier_spacing = 15e3
-    fft_size = 48
+    fft_size = 792
     frequencies = subcarrier_frequencies(fft_size, subcarrier_spacing)
     h_freq = paths.cfr(frequencies=frequencies, normalize=False,
                        normalize_delays=False, out_type="numpy")
@@ -125,7 +135,7 @@ Organizing the generated data for easier visualization and export to Matlab
 
 
 # --- Create root output directory ---
-output_root = "structured_output_test_1"
+output_root = "structured_output_test_2"
 os.makedirs(output_root, exist_ok=True)
 
 # --- Start looping over transmitters ---
@@ -231,12 +241,12 @@ for tx in range(len(scene.transmitters)):
                     for max_depth in range(vertices.shape[0]):
                         this_vertices = vertices[max_depth, tx]
                         for path in range(max_valid_path):
-                            row = [f"max_depth {max_depth+1}"]
+                            row = [f"{max_depth+1}"]
                             row.extend(this_vertices[path, coord] for coord in range(3))
                             writer.writerow(row)
                 elif vertices.ndim == 3:
                     for max_depth in range(vertices.shape[0]):
-                        row = [f"max_depth {max_depth+1}"]
+                        row = [f"{max_depth+1}"]
                         row.extend(vertices[max_depth, tx, coord] for coord in range(3))
                         writer.writerow(row)
 
@@ -244,15 +254,15 @@ for tx in range(len(scene.transmitters)):
 tx_info_path = os.path.join(output_root, "tx_rx_mapping.csv")
 with open(tx_info_path, "w", newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(["Transmitter", "X", "Y", "Z"])
-    for tx_name in scene.transmitters:
+    #writer.writerow(["Transmitter", "X", "Y", "Z"])
+    for tx_index, tx_name in enumerate(scene.transmitters):
         tx_obj = scene.get(tx_name)
         coords = np.squeeze(tx_obj.position)
-        writer.writerow([tx_name] + list(coords))
+        writer.writerow([tx_index+1] + list(coords))
     
     for i, pos_data in enumerate(data_combined):
-        rx_name = f"rx-{i}"
+        rx_name = i+1
         coords = pos_data["Position"]
         writer.writerow([rx_name] + list(coords))
 
-print(path_dict)
+#print(path_dict)
