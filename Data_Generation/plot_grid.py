@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 def main():
     # Replace 'grid_points.csv' with the path to your CSV file.
-    file_path = "Toy_Model/grid_points_toy_1x1.csv"
+    file_path = "Undergraduate_Thesis_Project\Data_Generation\Grid_points_1x1_Entrance.csv"
     
     # Read the CSV file into a DataFrame.
     data = pd.read_csv(file_path)
