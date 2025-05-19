@@ -21,8 +21,8 @@
 - Once the installations are done, use BLOSM(OpenStreetMap) to import the desired map. 
 - Using Blender, make the changes and add details to your map and rename the parameters for sionna ray tracing. 
 - Once this is done, export the map in XML file to be used for Sionna Ray Tracing.
-- One can also use the models that have been created under /MAP or the already exported XML file under 
-/Toy_Model for the Ray Tracing.
+- One can also use the models that have been created under /MAP or the already exported XML files under 
+/Data_Generation for the Ray Tracing.
 
 ### Data Generation using Python
 - Using Python install Sionna. For more information on installation, please visit the website.
