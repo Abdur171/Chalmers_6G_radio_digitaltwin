@@ -26,7 +26,7 @@
 
 ### Data Generation using Python
 - Using Python install Sionna. For more information on installation, please visit the website.
-- The file test_structured_data.py is the complete code necessary for the data generation. 
+- The file ############### is the complete code necessary for the data generation. 
 - Please go through the code before running the file. Make sure the map file being imported is correct and the parameters are configured correctly. 
 - Using the file, you can get all the desired data parameters in different files for each transmitter and reciever pair. 
 - These parameter files can then be used for KPI analysis using Matlab. 
