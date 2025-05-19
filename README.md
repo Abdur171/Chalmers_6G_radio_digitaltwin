@@ -1,23 +1,32 @@
-User Tutorial:
+## Prerequisites
+### Hardware
+- NVIDIA GPU (RTX 2080 or higher recommended) 
+- 16GB+ RAM
+- 50GB+ free storage for datasets
+- One could run the toy model if the above requirments are not meant.
 
-1. Blender3
-   - addon: Blender-osm
-   - addon: Mitsuba-blener
+### Software
+- [Blender 3.3+](https://www.blender.org/download/)
+- [Python 3.8+](https://www.python.org/downloads/)
+- [Sionna RT](https://nvlabs.github.io/sionna/)
+- MATLAB (for KPI analysis)
+- Required Blender Add-ons:
+  - [BLOSM](https://github.com/vvoovv/blosm)
+  - [Mitsuba Exporter](https://github.com/mitsuba-renderer/mitsuba-blender)
   
-TASKS:
+  
+## Tutorial
+### Creating the model with Blender
+- Begin with installing the required softwares. For more information on installation please visit the respective website for each software. 
+- Once the installations are done, use BLOSM(OpenStreetMap) to import the desired map. 
+- Using Blender, make the changes and add details to your map and rename the parameters for sionna ray tracing. 
+- Once this is done, export the map in XML file to be used for Sionna Ray Tracing.
+- One can also use the models that have been created under /MAP or the already exported XML file under 
+/Toy_Model for the Ray Tracing.
 
-1, Export the 2D grid overlay from Blender
-2. Divide up the campus
-3. Export the MAP
-4. Convert from tf.Tensor to numpy.array
-5. Generate the data with 50cm grid
-6. export 2D grid overlay with highest resolution
-7. Generate the data on GPU server
-
-Questions:
-
-1. Do we add elevation to the map
-2. What kind of singal to use
-
-Extra:
-1. Add trajectories
+### Data Generation using Python
+- Using Python install Sionna. For more information on installation, please visit the website.
+- The file test_structured_data.py is the complete code necessary for the data generation. 
+- Please go through the code before running the file. Make sure the map file being imported is correct and the parameters are configured correctly. 
+- Using the file, you can get all the desired data parameters in different files for each transmitter and reciever pair. 
+- These parameter files can then be used for KPI analysis using Matlab. 
