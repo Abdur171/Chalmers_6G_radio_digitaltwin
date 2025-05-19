@@ -3,7 +3,7 @@
 - NVIDIA GPU (RTX 2080 or higher recommended) 
 - 16GB+ RAM
 - 50GB+ free storage for datasets
-- One could run the toy model if the above requirments are not meant.
+- One could run the toy model if the above requirments are not met, it is also possible to only use the CPU.
 
 ### Software
 - [Blender 3.3+](https://www.blender.org/download/)
