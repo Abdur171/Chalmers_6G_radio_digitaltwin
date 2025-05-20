@@ -21,7 +21,7 @@ The installation of [Blender](https://www.blender.org/download/) can be made fro
 - [Python 3.10.9](https://www.python.org/downloads/release/python-3109/)
 - [Sionna v1.0.2](https://github.com/NVlabs/sionna-rt/releases/tag/v1.0.2)
 - [Blender 3.6 LTS](https://www.blender.org/download/lts/3-6/) (newer versions exist; make sure the version is compatible with the add-ons)
-- Required Blender Add-ons:
+- Blender Add-ons:
   - [BLOSM](https://prochitecture.gumroad.com/l/blender-osm)
   - [Mitsuba-Blender v0.3.0](https://github.com/mitsuba-renderer/mitsuba-blender/releases/tag/v0.3.0) (works with Blender up to 3.6 LTS, newer versions of Mitsuba exist and should work with Blender versions up to 4.0)
 - MATLAB (for KPI analysis)
