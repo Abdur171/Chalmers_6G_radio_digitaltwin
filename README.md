@@ -43,7 +43,7 @@ https://www.youtube.com/watch?v=7xHLDxUaQ7c&t=309s
 
 - (Only if Topography is added) Use Blender's function "shrinkwrap" to attach the roads to the elevated ground.
 
-- Use the code "---" in the map "----" inside the Python text editor in Blender to generate a grid of meshes on the roads. After the grid has been generated, use the code "----" to save the coordinates of each grid point to a CSV file. To delete larger hierarchies in Blender, use the file "---".
+- Use the code in the file"Grid_1x1_adjustable", located in the folder "Python code for Blender" in /Map, inside the Python text editor in Blender, while the desired road is selected, to generate a grid of meshes on the road. The grid field is adjustable in height above ground and width. After the grid has been generated, use the code "Save_Collection_as_CSV" located in the same folder, while the grid collection is selected, to save the coordinates of each grid point to a CSV file. To delete larger hierarchies in Blender, use the file "Delete_Collection".
 
 - Export the map in an XML file format to be used with Sionna for the data generation.
 
@@ -67,10 +67,10 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 ### Data Generation
 - A folder that contains the Python script and files used for the data generation. 
-- The folder "Campus_XML" and "Entrance_XML" includes the map information for the whole campus and the map information for only the entrance of campus, respectively. 
+- The folder "Campus_XML" and "Entrance_XML" include the map information for the whole campus and the map information for only the entrance of the campus, respectively. 
 - The "Code_validation.ipynb" file can be used for validating the simulation, where a visualization of the simulation, including the BS and UE locations as well as the paths, can be seen.
 - The "Data_Generation" file is the complete code necessary for data generation. Read the code and make the desired changes to the files and parameters being used.
-- The "grid_points" files for are grid fields for both the entrance and the whole campus. 
+- The "grid_points" files are for grid fields for both the entrance and the whole campus. 
 - The "plot_grid" files are for visualization of the grids.
 
 ### Map
