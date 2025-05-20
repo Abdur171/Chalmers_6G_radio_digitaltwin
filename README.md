@@ -5,7 +5,7 @@ This repository contains the Pipeline for generating wave propagation data on a 
 ### Sionna RT
 For the installation of [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file), follow their installation guide on their repository or see the [Sionna Installation Documentation](https://nvlabs.github.io/sionna/installation.html) on their website.  
 > ℹ️ Both GPU and CPU work; see their installation guide for how to use either  
-> ⚠️ Make sure to install LLVM by Dr.Jit and the correct version of Tensorflow
+> ⚠️ Make sure to install LLVM by Dr.Jit (for CPU) and the correct version of Tensorflow
 
 ### Blender and Blender add-ons
 The installation of [Blender](https://www.blender.org/download/) can be made from the Blender website. Make sure to install a version compatible with the listed add-ons. (Their latest stable version should be fine, but check the add-ons requirements)
