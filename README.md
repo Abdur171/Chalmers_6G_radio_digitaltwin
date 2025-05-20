@@ -1,14 +1,14 @@
-This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). A Digital Twin of the University of Chalmers, the grid field for User Equipment positions, Data generation Code, as well as Data Handling and storage code, are included.
+This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://nvlabs.github.io/sionna/rt/index.html) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). A Digital Twin of the University of Chalmers, the grid field for User Equipment positions, Data generation Code, as well as Data Handling and storage code, are included.
 
 ## Installation
 
 ### Sionna RT
-For the installation of [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file), follow their installation guide.
-ℹ️ **Info:** (Both GPU and CPU work; see their installation guide for how to use either)
-⚠️ **Warning:** (Make sure to install LLVM by Dr.Jit and the correct version of Tensorflow)
+For the installation of [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file), follow their installation guide on their repository or see the [Sionna Installation Documentation](https://nvlabs.github.io/sionna/installation.html) on their website.  
+> ℹ️ Both GPU and CPU work; see their installation guide for how to use either  
+> ⚠️ Make sure to install LLVM by Dr.Jit and the correct version of Tensorflow
 
 ### Blender and Blender add-ons
-The installation of [Blender](https://www.blender.org/download/) can be done from the Blender website. Make sure to install a version compatible with the listed add-ons. (Their latest stable version should be fine, but check the add-ons requirements)
+The installation of [Blender](https://www.blender.org/download/) can be made from the Blender website. Make sure to install a version compatible with the listed add-ons. (Their latest stable version should be fine, but check the add-ons requirements)
 
 #### add-ons
 - [BLOSM](https://github.com/vvoovv/blosm?tab=readme-ov-file) is used to generate real-world terrain data and can set a   foundation for the development of a Digital Twin. For installation and other information, see their repository [BLOSM](https://github.com/vvoovv/blosm?tab=readme-ov-file) or their [detailed documentation](https://github.com/vvoovv/blosm/wiki/Documentation). (This add-on can be used in the creation of a new Digital twin, instead of the one provided in the repository)
@@ -23,7 +23,8 @@ The installation of [Blender](https://www.blender.org/download/) can be done fro
   - [BLOSM](https://prochitecture.gumroad.com/l/blender-osm)
   - [Mitsuba-Blender](https://github.com/mitsuba-renderer/mitsuba-blender/releases/tag/v0.3.0) (works with Blender up to 3.6 LTS, newer versions of Mitsuba exist and should work with Blender versions up to 4.0)
 - MATLAB (for KPI analysis)
-  
+
+
   
 ## Tutorial
 ### Creating the model with Blender
