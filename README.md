@@ -1,25 +1,35 @@
-## Prerequisites
-### Hardware
-- NVIDIA GPU (RTX 2080 or higher recommended) 
-- 16GB+ RAM
-- 50GB+ free storage for datasets
-- One could run the toy model if the above requirments are not met, it is also possible to only use the CPU.
+This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). A Digital Twin of the University of Chalmers, the grid field for User Equipment positions, Data generation Code, as well as Data Handling and storage code, are included.
 
-### Software
-- [Blender 3.3+](https://www.blender.org/download/)
-- [Python 3.8+](https://www.python.org/downloads/)
-- [Sionna RT](https://nvlabs.github.io/sionna/)
-- MATLAB (for KPI analysis)
+## Installation
+
+### Sionna RT
+For the installation of [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file), follow their installation guide.
+ℹ️ **Info:** (Both GPU and CPU work; see their installation guide for how to use either)
+⚠️ **Warning:** (Make sure to install LLVM by Dr.Jit and the correct version of Tensorflow)
+
+### Blender and Blender add-ons
+The installation of [Blender](https://www.blender.org/download/) can be done from the Blender website. Make sure to install a version compatible with the listed add-ons. (Their latest stable version should be fine, but check the add-ons requirements)
+
+#### add-ons
+- [BLOSM](https://github.com/vvoovv/blosm?tab=readme-ov-file) is used to generate real-world terrain data and can set a   foundation for the development of a Digital Twin. For installation and other information, see their repository [BLOSM](https://github.com/vvoovv/blosm?tab=readme-ov-file) or their [detailed documentation](https://github.com/vvoovv/blosm/wiki/Documentation). (This add-on can be used in the creation of a new Digital twin, instead of the one provided in the repository)
+
+- [Mitsuba-blender](https://github.com/mitsuba-renderer/mitsuba-blender?tab=readme-ov-file) enables the export of the scene  in Blender in an XML file format, making it compatible with [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov- file). For installation, read the [Mitsuba-Blender installation & Update guide](https://github.com/mitsuba-renderer/mitsuba-blender/wiki/Installation-&-Update-Guide) or see their repository. (This add-on can be used if a new scene is created, instead of the provided XML files in the repository)
+
+#### Versions of the software that were used (newer versions might also work)
+- [Python 3.10.9](https://www.python.org/downloads/release/python-3109/)
+- [Sionna v1.0.2](https://github.com/NVlabs/sionna-rt/releases/tag/v1.0.2)
+- [Blender 3.6 LTS](https://www.blender.org/download/lts/3-6/) (newer versions exist; make sure the version is compatible with the add-ons)
 - Required Blender Add-ons:
-  - [BLOSM](https://github.com/vvoovv/blosm)
-  - [Mitsuba Exporter](https://github.com/mitsuba-renderer/mitsuba-blender)
+  - [BLOSM](https://prochitecture.gumroad.com/l/blender-osm)
+  - [Mitsuba-Blender](https://github.com/mitsuba-renderer/mitsuba-blender/releases/tag/v0.3.0) (works with Blender up to 3.6 LTS, newer versions of Mitsuba exist and should work with Blender versions up to 4.0)
+- MATLAB (for KPI analysis)
   
   
 ## Tutorial
 ### Creating the model with Blender
-- Begin with installing the required softwares. For more information on installation please visit the respective website for each software. 
+- Begin by installing the required software. For more installation information, please visit the respective website for each software. 
 - Once the installations are done, use BLOSM(OpenStreetMap) to import the desired map. 
-- Using Blender, make the changes and add details to your map and rename the parameters for sionna ray tracing. 
+- Using Blender, make the changes and add details to your map, and rename the parameters for sionna ray tracing. 
 - Once this is done, export the map in XML file to be used for Sionna Ray Tracing.
 - One can also use the models that have been created under /MAP or the already exported XML files under 
 /Data_Generation for the Ray Tracing.
