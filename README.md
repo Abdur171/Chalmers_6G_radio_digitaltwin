@@ -32,11 +32,14 @@ https://www.youtube.com/watch?v=7xHLDxUaQ7c&t=309s
 
 ### Creating the model with Blender (optional)
 
-- Begin by installing the required software. For more installation information, please see the installation section.
+- Begin by installing the required software (Blender and the Blender add-ons). For more installation information, please see the installation section.
 
-- Use BLOSM(OpenStreetMap) to import the desired map. A tutorial can be seen in the video linked above, or in their [Documentation](https://github.com/vvoovv/blosm/wiki/Documentation). If the structural data is missing for the desired location, preset measurements of the user's choosing will be applied for these structures. The structures will need to be manually adjusted to reflect the real world.
+- Use BLOSM (OpenStreetMap) to import the desired map. A tutorial can be seen in the video linked above, or in their [Documentation](https://github.com/vvoovv/blosm/wiki/Documentation). If the structural data is missing for the desired location, preset measurements of the user's choosing will be applied for these structures. The structures will need to be manually adjusted to reflect the real world.
 
-- Make the desired changes and add desired details to the model (optional). Add the desired materials to all the surfaces and rename the materials for compatibility with Sionna. The material definitions can be found the the [Sionna Material Documentation](https://nvlabs.github.io/sionna/rt/api/radio_materials.html).
+- Make the desired changes and add desired details to the model (optional). Add the desired materials to all the surfaces and rename the materials for compatibility with Sionna. The material definitions can be found in the [Sionna Material Documentation](https://nvlabs.github.io/sionna/rt/api/radio_materials.html).  
+> ℹ️ if you have never used Blender before, a beginner's guide could be helpful
+
+- Topography can be added, either manually or with online data (optional).
 
 - Export the map in an XML file format to be used with Sionna for the data generation.
 
