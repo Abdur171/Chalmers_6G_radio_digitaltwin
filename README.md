@@ -1,3 +1,5 @@
+# Digital Radio Twin of Chalmers for 6G Integrated Sensing, Positioning, and Communication
+
 This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://nvlabs.github.io/sionna/rt/index.html) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). A Digital Twin of the University of Chalmers, the grid field for User Equipment positions, Data generation Code, as well as Data Handling and storage code, are included.
 
 ## Installation
