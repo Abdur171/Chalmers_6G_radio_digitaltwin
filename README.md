@@ -54,7 +54,7 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 - Using Python, install Sionna. For more installation information, please see the installation section above.
 
-- The file "Data_Generation" under the folder Data_Generation is the complete code necessary for the data generation and data storage. Make sure that the correct map and grid field (for User Equipment (UE)) are used. Also, make sure that the parameters for the wave, Base stations, and UEs are configured as desired.
+- The file "Data_Generation" under the folder "Data_Generation" is the complete code for the data generation and data storage. Make sure that the correct map and grid field (for User Equipment (UE)) are used. Also, make sure that the parameters for the wave, Base stations, and UEs are configured as desired.
 
 ## Data Storage Structure
 
