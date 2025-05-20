@@ -23,7 +23,7 @@ The installation of [Blender](https://www.blender.org/download/) can be made fro
 - [Blender 3.6 LTS](https://www.blender.org/download/lts/3-6/) (newer versions exist; make sure the version is compatible with the add-ons)
 - Required Blender Add-ons:
   - [BLOSM](https://prochitecture.gumroad.com/l/blender-osm)
-  - [Mitsuba-Blender](https://github.com/mitsuba-renderer/mitsuba-blender/releases/tag/v0.3.0) (works with Blender up to 3.6 LTS, newer versions of Mitsuba exist and should work with Blender versions up to 4.0)
+  - [Mitsuba-Blender v0.3.0](https://github.com/mitsuba-renderer/mitsuba-blender/releases/tag/v0.3.0) (works with Blender up to 3.6 LTS, newer versions of Mitsuba exist and should work with Blender versions up to 4.0)
 - MATLAB (for KPI analysis)
 
 ### Beginner tutorial on Sionna, Blender, OSM, and Mitsuba (a little bit old but can still be useful)
