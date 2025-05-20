@@ -264,5 +264,3 @@ with open(tx_info_path, "w", newline="") as f:
         rx_name = i+1
         coords = pos_data["Position"]
         writer.writerow([rx_name] + list(coords))
-
-#print(path_dict)
