@@ -17,7 +17,7 @@ The installation of [Blender](https://www.blender.org/download/) can be made fro
 
 - [Mitsuba-blender](https://github.com/mitsuba-renderer/mitsuba-blender?tab=readme-ov-file) enables the export of the scene  in Blender in an XML file format, making it compatible with [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file). For installation, read the [Mitsuba-Blender installation & Update guide](https://github.com/mitsuba-renderer/mitsuba-blender/wiki/Installation-&-Update-Guide) or see their repository. (This add-on can be used if a new scene is created, instead of the provided XML files in the repository)
 
-#### Versions of the software that were used (newer versions might also work)
+### Versions of the software that were used (newer versions might also work)
 - [Python 3.10.9](https://www.python.org/downloads/release/python-3109/)
 - [Sionna v1.0.2](https://github.com/NVlabs/sionna-rt/releases/tag/v1.0.2)
 - [Blender 3.6 LTS](https://www.blender.org/download/lts/3-6/) (newer versions exist; make sure the version is compatible with the add-ons)
