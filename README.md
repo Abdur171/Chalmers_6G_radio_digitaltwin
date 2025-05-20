@@ -32,12 +32,12 @@ https://www.youtube.com/watch?v=7xHLDxUaQ7c&t=309s
 
 ### Creating the model with Blender (optional)
 
-- Begin by installing the required software (Blender and the Blender add-ons). For more installation information, please see the installation section.
+- Begin by installing the required software (Blender and the Blender add-ons). For more installation information, please see the installation section above.
 
 - Use BLOSM (OpenStreetMap) to import the desired map. A tutorial can be seen in the video linked above, or in their [Documentation](https://github.com/vvoovv/blosm/wiki/Documentation). If the structural data is missing for the desired location, preset measurements of the user's choosing will be applied for these structures. The structures will need to be manually adjusted to reflect the real world.
 
 - Make the desired changes and add desired details to the model (optional). Add the desired materials to all the surfaces and rename the materials for compatibility with Sionna. The material definitions can be found in the [Sionna Material Documentation](https://nvlabs.github.io/sionna/rt/api/radio_materials.html).  
-> ℹ️ if you have never used Blender before, a beginner's guide could be helpful
+> ℹ️ If you have never used Blender before, a beginner's guide could be helpful
 
 - Topography can be added, either manually or with online data (optional).
 
@@ -48,37 +48,31 @@ https://www.youtube.com/watch?v=7xHLDxUaQ7c&t=309s
 ### Data Generation using Python
 For information on how to use Sionna RT, see the [Sionna RT Documentation](https://nvlabs.github.io/sionna/rt/index.html).
 
-- Using Python, install Sionna. For more information on installation, please visit the website.
-- The file Data_Generation under the folder Data_Generation is the complete code necessary for the data generation. 
-- Please go through the code before running the file. Make sure the map file being imported is correct and the parameters are configured correctly. 
-- Using the file, you can get all the desired data parameters in different files for each transmitter and receiver pair. 
-- These parameter files can then be used for KPI analysis using MATLAB. 
+- Using Python, install Sionna. For more installation information, please see the installation section above.
+
+- The file Data_Generation under the folder Data_Generation is the complete code necessary for the data generation and data storage. Make sure that the correct map and grid field (for User Equipment (UE)) are used. Also, make sure that the parameters for the wave, Base stations, and UEs are configured as desired.
+
+## Data Storage Structure
+
+--- (Coming)
 
 ## Git Files Explained
 ### Data
-- Data that has been generated and can be directly used for KPI analysis. Includes folders for each transmitter, which in turn include a folder for each receiver. 
-- Each receiver folder named rx_x includes four files, which are: Multi-path Fading Coefficients 
-(a_coeffs.csv), Channel Frequency Responses (h_frequency.csv), Path Parameters (other_params.csv), and Reflection and Scattering Points (vertices.csv). 
-- The outer most folder (Data) includes the file Base Staion/User Equipment Mapping (tx_rx_mapping.csv).
+- Generated data on the Digital twin of Chalmers campus; however, UEs are only placed around the Entrance, "Kårhuset", and "Kårrestaurangen". The data can be directly used for KPI analysis. Includes folders for each transmitter, which in turn include a folder for each receiver. 
+- Each receiver folder named rx_x includes four files, which are: Multi-path Fading Coefficients (a_coeffs.csv), Channel Frequency Responses (h_frequency.csv), Path Parameters (other_params.csv), and Reflection and Scattering Points (vertices.csv). In a separate folder, the data of Base Station/User Equipment Mapping (tx_rx_mapping.csv) can be found.
 
 ### Data Generation
-- A folder that contains the Python script and map files necessary for data generation. 
-- The folder Campus_XML and Entrance_XML includes the map for the whole campus and the map for only the entrance, respectively. 
-- Code_validation.ipynb file that can be used for validating the parameter values generated to make sure they are correct.
-- Data Generation file that is the complete code necessary for data generation. Please read the code beforehand and make changes to the parameters and files being imported as necessary. 
-- grid_points files for both the entrance and the whole map. 
-- plot_grid files for visualization of the grids.
-
-### Extra
-- The folder contains the code for creating a simulated path for user equipment and waypoint navigation. There is also a visualization of collision avoidance. These features have not been thoroughly tested or used in this project. 
+- A folder that contains the Python script and files used for the data generation. 
+- The folder "Campus_XML" and "Entrance_XML" includes the map information for the whole campus and the map information for only the entrance of campus, respectively. 
+- The "Code_validation.ipynb" file can be used for validating the simulation, where a visualization of the simulation, including the BS and UE locations as well as the paths, can be seen.
+- The "Data_Generation" file is the complete code necessary for data generation. Read the code and make the desired changes to the files and parameters being used.
+- The "grid_points" files for are grid fields for both the entrance and the whole campus. 
+- The "plot_grid" files are for visualization of the grids.
 
 ### Map
-- The folder includes three different versions of maps from Blender. One is the full map for the whole Chalmers Campus, one is the entrance for the Johanneberg Campus with details, and the other is the toy model for the entrance. 
+- The folder includes three different versions of maps from Blender. The first one, "Chalmers_map_full", is the map for the whole Chalmers Campus with roads across the entire map, the second one, "Chalmers_map_entrance", is the same as the first one, but the roads are only placed around the entrance, "Kårhuset", and "Kårrestaurangen". The last one, "Chalmers_toy_entrance" is the map for only the entrance, "Kårhuset", and "Kårrestaurangen", and is the "toy model".
 
-### Poster Designs
-- Posters for the project are uploaded here. Have a look at our work. 
-
-## ReadME
-Includes the necessary information to get familiarised with the project. Please feel free to contact us if you have any questions.
+### Poster Designs and Thesis
+- The Thesis and a Poster for the project are uploaded here. Have a look at our work.
 
 
