@@ -24,12 +24,14 @@ The installation of [Blender](https://www.blender.org/download/) can be made fro
   - [Mitsuba-Blender](https://github.com/mitsuba-renderer/mitsuba-blender/releases/tag/v0.3.0) (works with Blender up to 3.6 LTS, newer versions of Mitsuba exist and should work with Blender versions up to 4.0)
 - MATLAB (for KPI analysis)
 
+### Beginner tutorial on Sionna, Blender, OSM, and Mitsuba (a little bit old but can still be useful)
+https://www.youtube.com/watch?v=7xHLDxUaQ7c&t=309s
 
   
 ## Tutorial
 ### Creating the model with Blender
 - Begin by installing the required software. For more installation information, please visit the respective website for each software. 
-- Once the installations are done, use BLOSM(OpenStreetMap) to import the desired map. 
+- Use BLOSM(OpenStreetMap) to import the desired map. 
 - Using Blender, make the changes and add details to your map, and rename the parameters for sionna ray tracing. 
 - Once this is done, export the map in XML file to be used for Sionna Ray Tracing.
 - One can also use the models that have been created under /MAP or the already exported XML files under 
