@@ -98,6 +98,9 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 - The "Data_Generation" file is the complete code necessary for data generation. Read the code and make the desired changes to the files and parameters being used.
 - The folder "Grids" contains the CSV files "Grid_points_1x1_Entrance" and "grid_points_1x1_full", which are grid fields for both the entrance and the whole campus, respectively. It also contains code for visualizing the grid fields.
 
+### KPI Analysis
+- A folder used for evaluating positioning (CRLB) and communication (capacity and latency) KPIs based on the received parameters from the data generation pipeline.
+
 ### Map
 - The folder includes three different versions of maps from Blender:
 1. "Chalmers_map_full" represents the map for the whole Chalmers Campus with roads across the entire map,
