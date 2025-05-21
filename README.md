@@ -1,6 +1,6 @@
 # Digital Radio Twin of Chalmers for 6G Integrated Sensing, Positioning, and Communication
 
-This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://nvlabs.github.io/sionna/rt/index.html) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). It includes the Digital Twin of Chalmers University, grid field for User Equipment (UE) positions, and the Data Generation code (for the generation of path data, data handling and storage).
+This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://nvlabs.github.io/sionna/rt/index.html) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). It includes the Digital Twin of Chalmers University, a grid field for User Equipment (UE) positions, and the Data Generation code (for the generation of path data, data handling, and storage).
 
 ## Installation
 
@@ -15,7 +15,7 @@ The installation of [Blender](https://www.blender.org/download/) can be made fro
 #### add-ons
 - [BLOSM](https://github.com/vvoovv/blosm?tab=readme-ov-file) is used to generate real-world terrain data and can set a foundation for the development of a Digital Twin. For installation and other information, see their repository [BLOSM](https://github.com/vvoovv/blosm?tab=readme-ov-file) or their [detailed documentation](https://github.com/vvoovv/blosm/wiki/Documentation). (This add-on can be used in the creation of a new Digital twin, instead of the one provided in the repository)
 
-- [Mitsuba-blender](https://github.com/mitsuba-renderer/mitsuba-blender?tab=readme-ov-file) enables the export of scenes in Blender as an XML file format, making it compatible with [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file) (!remember to set the coordinates to "Y Forward" and "Z Up" and tic in the box "Export ID's"!). For installation, read the [Mitsuba-Blender installation & Update guide](https://github.com/mitsuba-renderer/mitsuba-blender/wiki/Installation-&-Update-Guide) or see their repository. (This add-on can be used if a new scene is created, instead of the provided XML files in the repository)
+- [Mitsuba-blender](https://github.com/mitsuba-renderer/mitsuba-blender?tab=readme-ov-file) enables the export of scenes in Blender as an XML file format, making it compatible with [Sionna RT](https://github.com/NVlabs/sionna-rt?tab=readme-ov-file). For installation, read the [Mitsuba-Blender installation & Update guide](https://github.com/mitsuba-renderer/mitsuba-blender/wiki/Installation-&-Update-Guide) or see their repository. (This add-on can be used if a new scene is created, instead of the provided XML files in the repository)
 
 ### Versions of the software that were used (newer versions might also work)
 - [Python 3.10.9](https://www.python.org/downloads/release/python-3109/)
@@ -48,6 +48,7 @@ https://www.youtube.com/watch?v=7xHLDxUaQ7c&t=309s
 - Use the code in the file "Grid_1x1_adjustable", located in the folder "Python code for Blender" in /Map, inside the Python text editor in Blender, while the desired road is selected, to generate a grid of meshes on the road. The grid field is adjustable in height above ground and width. After the grid has been generated, use the code "Save_Collection_as_CSV" located in the same folder, while the grid collection is selected, to save the coordinates of each grid point to a CSV file. To delete larger hierarchies in Blender, use the file "Delete_Collection".
 
 - Export the map in an XML file format to be used with Sionna for the data generation.
+> ⚠️⚠️⚠️ When exporting the XML file, remember to set the coordinates to "Y Forward" and "Z Up" and tick the box "Export IDs"
 
 > ℹ️ Available models and exported XML files for these models can be found under /MAP and /Data_Generation, respectively, and can be used for the Ray Tracing simulation (data generation).
 
@@ -60,16 +61,16 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 ## Data Storage Structure
 
-- The generated data is sorted in a big folder "structured_data". On this Git, it is named simply "Data". It includes folders for each transmitter (tx_x) which in turn include folders for each receiver (rx_x). 
-- Each receiver folder includes four files (if available paths are present) which are:
+- The generated data is sorted in a big folder "structured_data". On this Git, it is named simply "Data". It includes folders for each transmitter (tx_x), which in turn include folders for each receiver (rx_x). 
+- Each receiver folder includes four files (if paths are present), which are:
 
-1) Complex Channel Gains (a_coeffs.csv), α ∈ ℂ^{num_paths × (num_tx_ant × 2)}: Each row corresponds to one propagation path followed by the values for each antenna element at the transmitter side. 2 marks the alternation between real and imaginary parts of the complex channel gain for each antenna element.
+  - Complex Channel Gains (a_coeffs.csv), α ∈ ℂ^{num_paths × (num_tx_ant × 2)}: Each row corresponds to one propagation path followed by the values for each antenna element at the transmitter side. 2 marks the alternation between real and imaginary parts of the complex channel gain for each antenna element.
   
-2) Channel Frequency Response (h_frequency.csv), CFR ∈ ℂ^{num_subcarriers × (num_tx_ant × 2): Each row represents one subcarrier followed by the values for each antenna element at the transmitter side. 2 marks the alternation between real and imaginary parts of the CFR for each antenna element.
+  - Channel Frequency Response (h_frequency.csv), CFR ∈ ℂ^{num_subcarriers × (num_tx_ant × 2): Each row represents one subcarrier followed by the values for each antenna element at the transmitter side. 2 marks the alternation between real and imaginary parts of the CFR for each antenna element.
 
-3) Other Path Parameters (other_params.csv), params ∈ ℝ^{num_paths × 6}: Additional path-specific parameters received from Sionna RT's path data. Each row corresponds to one propagation path followed by the propagation delay (_tau), Doppler shift (_doppler), azimuth AoA/AoD (_phi_r/_phi_t), and zenith AoA/AoD (_theta_r/_theta_t) in the stated order. 6 marks the total number of parameters listed in the file (changes if other available path parameters from Sionna RT's path data are used).
+  - Other Path Parameters (other_params.csv), params ∈ ℝ^{num_paths × 6}: Additional path-specific parameters received from Sionna RT's path data. Each row corresponds to one propagation path followed by the propagation delay (_tau), Doppler shift (_doppler), azimuth AoA/AoD (_phi_r/_phi_t), and zenith AoA/AoD (_theta_r/_theta_t) in the stated order. 6 marks the total number of parameters listed in the file (changes if other available path parameters from Sionna RT's path data are used).
 
-4) Reflection and Scattering Points (vertices.csv), vertices ∈ ℝ^{(max_depth × num_paths) × 4} : Each row corresponds to one interaction point per path followed by the 3D coordinates (x, y, z). For example, in a two-bounce scenario, each path will contribute to two rows, one for each interaction point.
+  - Reflection and Scattering Points (vertices.csv), vertices ∈ ℝ^{(max_depth × num_paths) × 4}: Each row corresponds to one interaction point per path, followed by the 3D coordinates (x, y, z). For example, in a two-bounce scenario, each path will contribute to two rows, one for each interaction point.
    
 - The outer most folder (structured_data) includes the file (tx_rx_mapping.csv) for the positioning of every BS and UE, mapping ∈ ℝ^{(num_tx + num_rx) × 4}: Each row includes a unique identifier for the BS/UE followed by the 3D coordinates (x, y, z). BSs are listed first, followed by UEs.
 
@@ -89,8 +90,8 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 ### Map
 - The folder includes three different versions of maps from Blender:
-1. "Chalmers_map_full", represents the map for the whole Chalmers Campus with roads across the entire map,
-2. "Chalmers_map_entrance", is the same as the "Chalmers_map_full", but the roads are only placed around the entrance, "Kårhuset", and "Kårrestaurangen".
+1. "Chalmers_map_full" represents the map for the whole Chalmers Campus with roads across the entire map,
+2. "Chalmers_map_entrance" is the same as the "Chalmers_map_full", but the roads are only placed around the entrance, "Kårhuset", and "Kårrestaurangen".
 3. "Chalmers_toy_entrance" represents the map for only the entrance, "Kårhuset", and "Kårrestaurangen", and is referred to as the "toy model".
 
 ### Poster Designs and Thesis
