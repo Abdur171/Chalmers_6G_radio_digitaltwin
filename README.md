@@ -60,7 +60,15 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 ## Data Storage Structure
 
---- (Coming)
+- Data that is generated is sorted in one big folder "Structured Data". On this Git, it is named simply "Data". It includes folders for each transmitter(tx_x) which in turn includes folder for each reciever. 
+- Each reciever folder named rx_x includes four files which are:
+1) Multi-path Fading Coefficients(a_coeffs.csv): Each row corresponds to
+one propagation path, and the columns alternate between the real and imaginary
+parts of the fading coefficients
+2) Channel Frequency Responses (h_frequency.csv): Each row represents one subcarrier, and the columns provide the real and imaginary parts of the CFR for each BS-UE antenna pair.
+3) Path Parameters (other_params.csv):Additional path-specific parameters, such as the time delay (_tau), Doppler shift(_doppler), azimuth AoA/AoD (_phi_r/_phi_t), and zenith AoA/AoD (_theta_r/_theta_t) were saved into the other_params.csv file. Each row corresponds to a single path, and each column represents one of the parameters in their respective order.
+4) Reflection and Scattering Points (vertices.csv): Each row corresponds to one interaction point per path and includes the 3D co-ordinates (x, y, z), prefixed with a label indicating the reflection order (e.g., first bounce, second bounce, etc.). For example, in a two-bounce scenario, each path will contribute two rows, one for each interaction point.
+- The outer most folder (Structured Data) includes the file Base Staion/User Equipment Mapping (tx_rx_mapping.csv). Each row includes a unique identifier followed by the (x, y, z) coordinates. BSs are listed first, followed by UEs.
 
 ## Git Files Explained
 ### Data
