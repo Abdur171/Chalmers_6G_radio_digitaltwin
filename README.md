@@ -59,7 +59,7 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 - The file "Data_Generation" under the folder "Data_Generation" is the complete code for the data generation and data storage. Make sure that the correct map and grid field (for UE positions) are used. Also, make sure the radio aspects of the signal, BSs, and UEs are configured as desired.
 
-## Data Storage Structure
+## Data Storage and Structure
 
 - The generated data is sorted in a big folder "structured_data". On this Git, it is named simply "Data". It includes folders for each transmitter (tx_x), which in turn include folders for each receiver (rx_x). 
 - Each receiver folder includes four files (if paths are present), which are:
