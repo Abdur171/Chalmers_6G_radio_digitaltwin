@@ -83,13 +83,13 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
   - Reflection and Scattering Points (vertices.csv), vertices ∈ ℝ^{(max_depth × num_paths) × 4}: Each row corresponds to one interaction point per path, followed by the 3D coordinates (x, y, z). For example, in a two-bounce scenario, each path will contribute to two rows, one for each interaction point.
    
-- The outer most folder (structured_data) includes the file (tx_rx_mapping.csv) for the positioning of every BS and UE, mapping ∈ ℝ^{(num_tx + num_rx) × 4}: Each row includes a unique identifier for the BS/UE followed by the 3D coordinates (x, y, z). BSs are listed first, followed by UEs.
+- The outermost folder (structured_data) includes the file (tx_rx_mapping.csv) for the positioning of every BS and UE, mapping ∈ ℝ^{(num_tx + num_rx) × 4}: Each row includes a unique identifier for the BS/UE followed by the 3D coordinates (x, y, z). BSs are listed first, followed by UEs.
 
 ## Git Files Explained
 ### Data
 - Includes the generated data on the Digital twin of Chalmers campus; however, UEs are only placed around the entrance, "Kårhuset", and "Kårrestaurangen". The data can be directly used for KPI analysis. Includes folders for each BS, which in turn include folders for each UE.
 - Each User Equipment folder named rx_x includes four files, which are: Complex Channel coefficients (a_coeffs.csv), Channel Frequency Response (h_frequency.csv), Other Path Parameters (other_params.csv), and Reflection and Scattering Points (vertices.csv).
-- Inside outer most folder "structured_data", the positioning of BSs and UEs can be found (tx_rx_mapping.csv).
+- Inside outermost folder "structured_data", the positioning of BSs and UEs can be found (tx_rx_mapping.csv).
 
 ### Data Generation
 - A folder containing the Python script and files used for the data generation. It also contains code for plotting the grids. 
@@ -99,7 +99,7 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 - The folder "Grids" contains the CSV files "Grid_points_1x1_Entrance" and "grid_points_1x1_full", which are grid fields for both the entrance and the whole campus, respectively. It also contains code for visualizing the grid fields.
 
 ### KPI Analysis
-- A folder used for evaluating positioning (CRLB) and communication (capacity and latency) KPIs based on the received parameters from the data generation pipeline.
+- A folder with MATLAB code, used for evaluating positioning (CRLB) and communication (capacity and latency) KPIs based on the received parameters from the data generation pipeline.
 
 ### Map
 - The folder includes three different versions of maps from Blender:
