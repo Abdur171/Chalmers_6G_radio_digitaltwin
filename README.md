@@ -2,6 +2,17 @@
 
 This repository contains the Pipeline for generating wave propagation data on a Digital 3D Environment. It is built with [Sionna RT](https://nvlabs.github.io/sionna/rt/index.html) (a ray tracing package in Python) and [Blender](https://www.blender.org/) (a 3D modeling tool). It includes the Digital Twin of Chalmers University, a grid field for User Equipment (UE) positions, and the Data Generation code (for the generation of path data, data handling, and storage).
 
+###
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/user-attachments/assets/652113af-5001-476f-b1a9-9d19d4f25775" alt="image_2_entrance_map" width="49%">
+  <img src="https://github.com/user-attachments/assets/a2b92252-ce6e-4bd5-b663-fda5a6dab4dc" alt="image_17_entrence_close" width="49%"/>
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/user-attachments/assets/d3a9e27d-cfa3-4ff7-839c-83bab320b103" alt="image_15_Z" width="49%">
+  <img src="https://github.com/user-attachments/assets/f270e5c5-88a3-4a7c-927f-c951860a3036" alt="Digital Radio Twin 1" style="height: 278px; width: auto;" width="49%">
+</div>
+
 ## Installation
 
 ### Sionna RT
