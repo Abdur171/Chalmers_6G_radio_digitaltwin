@@ -10,7 +10,7 @@ This repository contains the Pipeline for generating wave propagation data on a 
 
 <div style="display: flex; justify-content: space-between;">
   <img src="https://github.com/user-attachments/assets/d3a9e27d-cfa3-4ff7-839c-83bab320b103" alt="image_15_Z" width="49%">
-  <img src="https://github.com/user-attachments/assets/f270e5c5-88a3-4a7c-927f-c951860a3036" alt="Digital Radio Twin 1" style="height: 278px; width: auto;" width="49%">
+  <img src="https://github.com/user-attachments/assets/f270e5c5-88a3-4a7c-927f-c951860a3036" alt="Digital Radio Twin 1" width: auto;" width="49%">
 </div>
 
 ## Installation
