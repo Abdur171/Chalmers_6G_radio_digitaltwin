@@ -68,16 +68,16 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 - Install Sionna using pip install. For more installation information, please see the installation section above.
 
-- The file "Data_Generation" under the folder "Data_Generation" is the complete code for the data generation and data storage. Make sure that the correct map and grid field (for UE positions) are used. Also, make sure the radio aspects of the signal, BSs, and UEs are configured as desired.
+- The file "Data_Generation" under the folder "Data_Generation" is the complete code for the data generation and data storage. Make sure that the correct map and grid field (for UE positions) are used. Also, make sure the radio aspects of the signal, Base Stations (BSs), and User Equipments (UEs) are configured as desired.
 
 ## Data Storage and Structure
 
-- The generated data is sorted in a big folder "structured_data". On this Git, it is named simply "Data". It includes folders for each transmitter (tx_x), which in turn include folders for each receiver (rx_x). 
-- Each receiver folder includes four files (if paths are present), which are:
+- The generated data is sorted in a big folder "structured_data". On this Git, it is named simply "Data". It includes folders for each Base Station (tx_x), which in turn include folders for each User Equipment (rx_x). 
+- Each User Equipment folder includes four files (if paths are present), which are:
 
-  - Complex Channel Gains (a_coeffs.csv), α ∈ ℂ^{num_paths × (num_tx_ant × 2)}: Each row corresponds to one propagation path followed by the values for each antenna element at the transmitter side. 2 marks the alternation between real and imaginary parts of the complex channel gain for each antenna element.
+  - Complex Channel Gains (a_coeffs.csv), α ∈ ℂ^{num_paths × (num_tx_ant × 2)}: Each row corresponds to one propagation path followed by the values for each antenna element at the Base Station side. 2 marks the alternation between real and imaginary parts of the complex channel gain for each antenna element.
   
-  - Channel Frequency Response (h_frequency.csv), CFR ∈ ℂ^{num_subcarriers × (num_tx_ant × 2): Each row represents one subcarrier followed by the values for each antenna element at the transmitter side. 2 marks the alternation between real and imaginary parts of the CFR for each antenna element.
+  - Channel Frequency Response (h_frequency.csv), CFR ∈ ℂ^{num_subcarriers × (num_tx_ant × 2): Each row represents one subcarrier followed by the values for each antenna element at the Base Station side. 2 marks the alternation between real and imaginary parts of the CFR for each antenna element.
 
   - Other Path Parameters (other_params.csv), params ∈ ℝ^{num_paths × 6}: Additional path-specific parameters received from Sionna RT's path data. Each row corresponds to one propagation path followed by the propagation delay (_tau), Doppler shift (_doppler), azimuth AoA/AoD (_phi_r/_phi_t), and zenith AoA/AoD (_theta_r/_theta_t) in the stated order. 6 marks the total number of parameters listed in the file (changes if other available path parameters from Sionna RT's path data are used).
 
@@ -87,17 +87,16 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 
 ## Git Files Explained
 ### Data
-- Includes the generated data on the Digital twin of Chalmers campus; however, UEs are only placed around the entrance, "Kårhuset", and "Kårrestaurangen". The data can be directly used for KPI analysis. Includes folders for each transmitter, which in turn include folders for each receiver. 
-- Each receiver folder named rx_x includes four files, which are: Complex Channel coefficients (a_coeffs.csv), Channel Frequency Response (h_frequency.csv), Other Path Parameters (other_params.csv), and Reflection and Scattering Points (vertices.csv).
+- Includes the generated data on the Digital twin of Chalmers campus; however, UEs are only placed around the entrance, "Kårhuset", and "Kårrestaurangen". The data can be directly used for KPI analysis. Includes folders for each BS, which in turn include folders for each UE.
+- Each User Equipment folder named rx_x includes four files, which are: Complex Channel coefficients (a_coeffs.csv), Channel Frequency Response (h_frequency.csv), Other Path Parameters (other_params.csv), and Reflection and Scattering Points (vertices.csv).
 - Inside outer most folder "structured_data", the positioning of BSs and UEs can be found (tx_rx_mapping.csv).
 
 ### Data Generation
-- A folder containing the Python script and files used for the data generation. 
+- A folder containing the Python script and files used for the data generation. It also contains code for plotting the grids. 
 - The folder "Campus_XML" and "Entrance_XML" include the map information for the whole campus and the map information for only the entrance of the campus, respectively. 
-- The "Code_validation.ipynb" file can be used for validating the simulation parameters, where a visualization of the BS and UE locations as well as the propagation paths can be seen.
+- The "Code_validation.ipynb" file can be used for validating the simulation parameters, where a visualization of the BSs and UEs locations, as well as the propagation paths, can be seen.
 - The "Data_Generation" file is the complete code necessary for data generation. Read the code and make the desired changes to the files and parameters being used.
-- The "grid_points" files are for grid fields for both the entrance and the whole campus. 
-- The "plot_grid" files are for visualization of the grids.
+- The folder "Grids" contains the CSV files "Grid_points_1x1_Entrance" and "grid_points_1x1_full", which are grid fields for both the entrance and the whole campus, respectively. It also contains code for visualizing the grid fields.
 
 ### Map
 - The folder includes three different versions of maps from Blender:
@@ -105,7 +104,7 @@ For information on how to use Sionna RT, see the [Sionna RT Documentation](https
 2. "Chalmers_map_entrance" is the same as the "Chalmers_map_full", but the roads are only placed around the entrance, "Kårhuset", and "Kårrestaurangen".
 3. "Chalmers_toy_entrance" represents the map for only the entrance, "Kårhuset", and "Kårrestaurangen", and is referred to as the "toy model".
 
-### Poster Designs and Thesis
+### Thesis
 - The Thesis and a Poster for the project are uploaded here. Have a look at our work!
 
 
