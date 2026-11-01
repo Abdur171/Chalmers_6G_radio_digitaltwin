@@ -103,10 +103,10 @@ Bachelor_Thesis_Chalmers_radio_digitaltwin/
 For each receiver node `rx_N`, the dataset provides four synchronized telemetry matrices:
 
 1. **Complex Channel Coefficients (`a_coeffs.csv`)**:  
-   $\alpha \in \mathbb{C}^{N_{\text{paths}} \times (N_{\text{tx\_ant}} \times 2)}$.  
+   $\mathbf{alpha} \in \mathbb{C}^{N{\text{paths}} \times (N{\text{tx\ant}} \times 2)}$.  
    Contains alternating real and imaginary components of path gains per antenna element.
 2. **Channel Frequency Response (`h_frequency.csv`)**:  
-   $\text{CFR} \in \mathbb{C}^{N_{\text{subcarriers}} \times (N_{\text{tx\_ant}} \times 2)}$.  
+   $\text{CFR} \in \mathbb{C}^{N{\text{subcarriers}} \times (N{\text{tx\ant}} \times 2)}$.  
    Wideband channel frequency response sampled over allocated OFDM subcarriers.
 3. **Propagation Parameters (`other_params.csv`)**:  
    $\mathbf{P} \in \mathbb{R}^{N_{\text{paths}} \times 6}$.  
@@ -160,7 +160,7 @@ This research was developed as an official undergraduate degree project at **Cha
   - Liping Bai
   - Ramtin Mobaraki
   - Malte Rylander
-  - Jamal Al-Banna
+  - Jamal Abdi Jamal
 - **Academic Supervisors**:
   - **Prof. Henk Wymeersch** (Professor of Communication Systems, Chalmers University of Technology)
   - **Christian Nelson** (Doctoral Researcher in Wireless Communication & ISAC)
@@ -172,7 +172,7 @@ This research was developed as an official undergraduate degree project at **Cha
 If you use this dataset or ray-tracing model in your research, please cite:
 ```bibtex
 @bachelorthesis{chalmers_radio_digitaltwin_2024,
-  author    = {Arshad, Abdur and Hamouche, Antony and Bai, Liping and Mobaraki, Ramtin and Rylander, Malte and Al-Banna, Jamal},
+  author    = {Arshad, Abdur and Hamouche, Antony and Bai, Liping and Mobaraki, Ramtin and Rylander, Malte and Abdi, Jamal},
   title     = {Digital Radio Twin of Chalmers for 6G Integrated Sensing, Positioning, and Communication},
   school    = {Chalmers University of Technology},
   department= {Department of Electrical Engineering},
