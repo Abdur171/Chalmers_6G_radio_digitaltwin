@@ -1,8 +1,10 @@
+import os
 import pandas as pd
 import plotly.express as px
 
 def main():
-    file_path = "Undergraduate_Thesis_Project/Data_Generation/grid_points_1x1_full.csv"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, "grid_points_1x1_full.csv")
     data = pd.read_csv(file_path)
 
     fig = px.scatter_3d(

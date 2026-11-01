@@ -21,8 +21,14 @@ from sionna.phy.mimo import StreamManagement
 
 tf.random.set_seed(42)
 
+# Resolve script directory for portable path resolution
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Load integrated scene from the xml file
-scene = load_scene("Undergraduate_Thesis_Project/Data_Generation/Entrance_XML/chalmers_map_v53_Entrence_for_datageneration.xml")
+scene_xml = os.path.join(script_dir, "Entrance_XML", "chalmers_map_entrance.xml")
+if not os.path.exists(scene_xml):
+    scene_xml = os.path.join(script_dir, "Entrance_XML", "chalmers_map_v53_Entrence_for_datageneration.xml")
+scene = load_scene(scene_xml)
 fc = 3.5e9
 scene.frequency = fc
 c = 3e8
@@ -70,7 +76,10 @@ tx6 = Transmitter("tx6", [-84.3, -221, 25.8], [0.0, 0.0, 0.0])
 scene.add(tx6)
 
 # Receiver grid
-grid_position = pd.read_csv("Undergraduate_Thesis_Project/Data_Generation/Grid_points_1x1_Entrance.csv")
+grid_csv = os.path.join(script_dir, "Grids", "Grid_points_1x1_Entrance.csv")
+if not os.path.exists(grid_csv):
+    grid_csv = os.path.join(script_dir, "Grid_points_1x1_Entrance.csv")
+grid_position = pd.read_csv(grid_csv)
 ue_grid = grid_position[['X','Y','Z']].values.tolist()
 ue_positions = tf.squeeze(ue_grid)
 

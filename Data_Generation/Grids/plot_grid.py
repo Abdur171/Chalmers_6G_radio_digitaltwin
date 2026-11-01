@@ -1,10 +1,11 @@
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
-    # Replace 'grid_points.csv' with the path to your CSV file.
-    file_path = "Undergraduate_Thesis_Project\Data_Generation\grid_points_1x1_full.csv"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, "grid_points_1x1_full.csv")
     
     # Read the CSV file into a DataFrame.
     data = pd.read_csv(file_path)
